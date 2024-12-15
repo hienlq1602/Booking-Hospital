@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".activity.LogInActivity">
+
+    <!-- LOGO -->
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/umbrella_logo_3" /><!-- end LOGO -->
+
+    <!-- SLOGAN -->
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/umbrella"
+            android:textColor="@color/colorTheme"
+            android:textSize="13sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/has_you_covered"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="13sp"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout><!-- end SLOGAN -->
+
+    <!-- LOGIN WITH PHONE NUMBER -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/login_with_phone_number"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="12sp" /><!-- end LOGIN WITH PHONE NUMBER -->
+
+    <!-- INPUT PHONE NUMBER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/vietnam_phone_prefix"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_weight="1"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:text="0399703005"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+        </LinearLayout><!-- end INPUT PHONE NUMBER -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Mật khẩu"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/txtPassWord"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_weight="1"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:text="12345"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="12sp" />
+
+        </LinearLayout><!-- end INPUT PHONE NUMBER -->
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <!-- BUTTON Get Authorization Code-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        style="@style/button_style_danger"
+        android:layout_gravity="center"
+        android:text="Login"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:text="@string/or"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="14sp" />
+
+    <!-- LOGIN WITH GOOGLE ACCOUNT -->
+    <ImageButton
+        android:id="@+id/btnGoogleLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_login_with_social_account"
+        android:paddingHorizontal="60dp"
+        android:paddingVertical="15dp"
+        android:src="@drawable/google_logo" />
+
+    <!-- REGISTER IF NO ACCOUNT -->
+    <TextView
+        android:id="@+id/tv_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/no_account_register"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="12sp" />
+</LinearLayout>

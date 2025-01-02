@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.R;
 //import com.example.do_an_tot_nghiep.Specialitypage.SpecialitypageActivity;
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.SpecialitypageActivity;
 import com.ndm.ptit.enitities.Speciality;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.squareup.picasso.Picasso;
@@ -76,11 +77,11 @@ public class SpecialityRecyclerView extends RecyclerView.Adapter<SpecialityRecyc
         }
 
         holder.name.setText(name);
-//        holder.layout.setOnClickListener(view->{
-//            Intent intent = new Intent(context, SpecialitypageActivity.class);
-//            intent.putExtra("specialityId",String.valueOf(id) );
-//            context.startActivity(intent);
-//        });
+        holder.layout.setOnClickListener(view->{
+            Intent intent = new Intent(context, SpecialitypageActivity.class);
+            intent.putExtra("specialityId",String.valueOf(id) );
+            context.startActivity(intent);
+        });
     }
 
     @Override

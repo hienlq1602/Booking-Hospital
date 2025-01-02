@@ -13,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
+import com.ndm.ptit.enitities.login.Patient;
 import com.ndm.ptit.enitities.signup.SignUpRequest;
 import com.ndm.ptit.enitities.signup.SignUpResponse;
+import com.ndm.ptit.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 SignUpRequest request = new SignUpRequest();
                 request.setEmail("user@gmail.com");
+                request.setType("patient");
                 request.setPhone(phone);
                 request.setPassword(password);
                 request.setPasswordConfirm(confirmPassword);
@@ -90,6 +93,11 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             SignUpResponse signUpResponse = response.body();
+                            Patient patient = new Patient();
+                            patient.setId(new Long(signUpResponse.getData().getId()));
+                            patient.setName(signUpResponse.getData().getName());
+                            patient.setPhone(signUpResponse.getData().getPhone());
+                            Utils.user.setData(patient);
                             if (signUpResponse.getResult() == 1) {
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 startActivity(intent);

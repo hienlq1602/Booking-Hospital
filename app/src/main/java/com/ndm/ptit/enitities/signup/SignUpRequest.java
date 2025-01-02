@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class SignUpRequest {
 
+    private String type;
     private String email;
     private String phone;
     private String password;
@@ -19,8 +20,9 @@ public class SignUpRequest {
     public SignUpRequest() {
     }
 
-    public SignUpRequest(String phone, String password, String passwordConfirm,
+    public SignUpRequest(String type,String phone, String password, String passwordConfirm,
                          String createAt, String updateAt) {
+        this.type="patient";
         this.email = "user@gmail.com";
         this.phone = phone;
         this.password = password;
@@ -32,6 +34,14 @@ public class SignUpRequest {
         this.avatar = null;
         this.createAt = createAt;
         this.updateAt =updateAt;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getEmail() {

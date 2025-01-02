@@ -89,7 +89,7 @@ public class SettingsFragment extends Fragment {
         Setting setting4 = new Setting(R.drawable.ic_personal_information, "information", getString(R.string.personal_information) );
         Setting setting5 = new Setting(R.drawable.ic_appearance, "appearance", getString(R.string.appearance) );
         Setting setting6 = new Setting(R.drawable.ic_email_us, "emailUs", context.getString(R.string.email_us));
-        Setting setting7 = new Setting(R.drawable.ic_guide, "guide", context.getString(R.string.guide));
+//        Setting setting7 = new Setting(R.drawable.ic_guide, "guide", context.getString(R.string.guide));
         Setting setting8 = new Setting(R.drawable.ic_exit, "exit", getString(R.string.exit) );
 
 
@@ -100,7 +100,7 @@ public class SettingsFragment extends Fragment {
         list.add(setting4);
         list.add(setting5);
         list.add(setting6);
-        list.add(setting7);
+//        list.add(setting7);
         list.add(setting8);
 
         SettingRecyclerView settingAdapter = new SettingRecyclerView(context, list);

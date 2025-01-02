@@ -48,7 +48,12 @@ public class Appointment {
     @SerializedName("update_at")
     private String updateAt;
 
-    // Getters and Setters
+    @SerializedName("room")
+    private Room room;
+
+    @SerializedName("doctor_name")
+    private String doctorName;
+
     public int getId() {
         return id;
     }
@@ -167,5 +172,47 @@ public class Appointment {
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public Room getRoom() {
+        if(room == null){
+            return new Room();
+        }
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", bookingId=" + bookingId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", patientBirthday='" + patientBirthday + '\'' +
+                ", patientReason='" + patientReason + '\'' +
+                ", patientPhone='" + patientPhone + '\'' +
+                ", numericalOrder=" + numericalOrder +
+                ", position=" + position +
+                ", appointmentTime='" + appointmentTime + '\'' +
+                ", date='" + date + '\'' +
+                ", status='" + status + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                ", room=" + room +
+                ", doctorName='" + doctorName + '\'' +
+                '}';
     }
 }

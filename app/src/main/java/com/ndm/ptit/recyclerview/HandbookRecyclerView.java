@@ -12,10 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.example.do_an_tot_nghiep.Model.Handbook;
-//import com.example.do_an_tot_nghiep.R;
-//import com.example.do_an_tot_nghiep.Webpage.WebpageActivity;
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.WebpageActivity;
 import com.squareup.picasso.Picasso;
 
 import com.ndm.ptit.enitities.Handbook;
@@ -52,23 +50,23 @@ public class HandbookRecyclerView extends RecyclerView.Adapter<HandbookRecyclerV
         String url = handbook.getUrl();
 
 
-//        Picasso.get().load(image).into(holder.image);
+        Picasso.get().load(image).into(holder.image);
         holder.name.setText(title);
 
         holder.name.setOnClickListener(view->{
-//            Intent intent = new Intent(context, WebpageActivity.class);
-//            intent.putExtra("url", url);
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, WebpageActivity.class);
+            intent.putExtra("url", url);
+            context.startActivity(intent);
         });
-//        holder.image.setOnClickListener(view->{
-//            Intent intent = new Intent(context, WebpageActivity.class);
-//            intent.putExtra("url", url);
-//            context.startActivity(intent);
-//        });
+        holder.image.setOnClickListener(view->{
+            Intent intent = new Intent(context, WebpageActivity.class);
+            intent.putExtra("url", url);
+            context.startActivity(intent);
+        });
         holder.layout.setOnClickListener(view->{
-//            Intent intent = new Intent(context, WebpageActivity.class);
-//            intent.putExtra("url", url);
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, WebpageActivity.class);
+            intent.putExtra("url", url);
+            context.startActivity(intent);
         });
     }
 
@@ -80,14 +78,14 @@ public class HandbookRecyclerView extends RecyclerView.Adapter<HandbookRecyclerV
     protected static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final LinearLayout layout;
-//        private final ImageView image;
+        private final ImageView image;
         private final TextView name;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.elementLayout);
-//            image = itemView.findViewById(R.id.elementImage);
+            image = itemView.findViewById(R.id.elementImage);
             name = itemView.findViewById(R.id.elementName);
         }
     }

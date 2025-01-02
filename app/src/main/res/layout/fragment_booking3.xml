@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout"
-    android:background="@color/colorBackground"
-    tools:context=".Bookingpage.BookingFragment3">
+    android:background="@color/colorBackground">
 
     <TextView
         android:padding="20dp"

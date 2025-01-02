@@ -3,8 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".helper.GlobalVariable"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,6 +25,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ptit"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.SpecialitypageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SearchpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.InformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EmailpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingpagePhotoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AlarmpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TreatmentpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RecordpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AppointmentpageInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingpageInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DoctorpageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ServicepageActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.AppearanceActivity"
             android:exported="false" />

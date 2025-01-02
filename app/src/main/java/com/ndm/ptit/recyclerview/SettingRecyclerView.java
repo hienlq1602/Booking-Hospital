@@ -28,7 +28,11 @@ import com.ndm.ptit.R;
 //import com.example.do_an_tot_nghiep.Settingspage.InformationActivity;
 //import com.example.do_an_tot_nghiep.Webpage.WebpageActivity;
 
+import com.ndm.ptit.activity.AlarmpageActivity;
 import com.ndm.ptit.activity.AppearanceActivity;
+import com.ndm.ptit.activity.BookingHistoryActivity;
+import com.ndm.ptit.activity.EmailpageActivity;
+import com.ndm.ptit.activity.InformationActivity;
 import com.ndm.ptit.activity.LogInActivity;
 import com.ndm.ptit.activity.WebpageActivity;
 import com.ndm.ptit.enitities.Setting;
@@ -74,10 +78,11 @@ public class SettingRecyclerView extends RecyclerView.Adapter<SettingRecyclerVie
                 case "appointmentHistory":
 //                    intent = new Intent(context, AppointmentHistoryActivity.class);
 //                    context.startActivity(intent);
+                    intent = new Intent(context, BookingHistoryActivity.class);
+                    context.startActivity(intent);
                     break;
                 case "bookingHistory":
-//                    intent = new Intent(context, BookingHistoryActivity.class);
-//                    context.startActivity(intent);
+//
                     break;
                 case "exit":
                     if (context instanceof Activity) {
@@ -98,20 +103,20 @@ public class SettingRecyclerView extends RecyclerView.Adapter<SettingRecyclerVie
                     context.startActivity(intent);
                     break;
                 case "information":
-//                    intent = new Intent(context, InformationActivity.class);
-//                    context.startActivity(intent);
+                    intent = new Intent(context, InformationActivity.class);
+                    context.startActivity(intent);
                     break;
                 case "emailUs":
-//                    intent = new Intent(context, EmailpageActivity.class);
-//                    context.startActivity(intent);
+                    intent = new Intent(context, EmailpageActivity.class);
+                    context.startActivity(intent);
                     break;
                 case "guide":
 //                    intent = new Intent(context, GuidepageActivity.class);
 //                    context.startActivity(intent);
                     break;
                 case "reminder":
-//                    intent = new Intent(context, AlarmpageActivity.class);
-//                    context.startActivity(intent);
+                    intent = new Intent(context, AlarmpageActivity.class);
+                    context.startActivity(intent);
                     break;
             }
 

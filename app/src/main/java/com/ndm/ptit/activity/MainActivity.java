@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ndm.ptit.R;
 import com.ndm.ptit.fragment.AppointmentpageFragment;
 import com.ndm.ptit.fragment.MainFragment;
+import com.ndm.ptit.fragment.NotificationFragment;
 import com.ndm.ptit.fragment.SettingsFragment;
 
 import java.lang.ref.WeakReference;
@@ -70,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
      * @since 17-11-2022
      * setup variable
      */
-    private void setupVariable()
-    {
+    private void setupVariable() {
 //        globalVariable = (GlobalVariable) this.getApplication();
         dialog = new Dialog(this);
 
@@ -96,17 +96,14 @@ public class MainActivity extends AppCompatActivity {
                 // setNumberOnNotificationIcon();
                 fragment = new MainFragment();
                 fragmentTag = "homeFragment";
-            }
-//        else if (shortcut == R.id.shortcutNotification) {
-//            // setNumberOnNotificationIcon();
-//            // fragment = new MainFragment();
-//            // fragmentTag = "notificationFragment";
-//        }
-        else if (shortcut == R.id.shortcutAppointment) {
-             fragment = new AppointmentpageFragment();
-             fragmentTag = "appointmentFragment";
-        }
-            else if (shortcut == R.id.shortcutPersonality) {
+            } else if (shortcut == R.id.shortcutNotification) {
+                // setNumberOnNotificationIcon();
+                fragment = new NotificationFragment();
+                fragmentTag = "notificationFragment";
+            } else if (shortcut == R.id.shortcutAppointment) {
+                fragment = new AppointmentpageFragment();
+                fragmentTag = "appointmentFragment";
+            } else if (shortcut == R.id.shortcutPersonality) {
 
                 fragment = new SettingsFragment();
                 fragmentTag = "settingsFragment";
@@ -120,9 +117,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * @author Phong-Kaster
      * activate a fragment right away
-     * */
-    public void enableFragment(Fragment fragment, String fragmentTag)
-    {
+     */
+    public void enableFragment(Fragment fragment, String fragmentTag) {
         /*Step 0 - update again fragmentTag to handle onBackPress()*/
         this.fragmentTag = fragmentTag;
 
@@ -148,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frameLayout, fragment, fragmentTag);
         transaction.commit();
     }
-//
+
+    //
 //    /**
 //     * @since 17-11-2022
 //     * if users click back button by accident or on purpose
@@ -171,8 +168,7 @@ public class MainActivity extends AppCompatActivity {
 //     * this function sets number on the right-top on notification icon
 //     * which lays on Bottom Navigation View
 //     */
-    public void setNumberOnNotificationIcon()
-    {
+    public void setNumberOnNotificationIcon() {
         /*Step 1 - setup Retrofit*/
 //        Retrofit service = HTTPService.getInstance();
 //        HTTPRequest api = service.create(HTTPRequest.class);

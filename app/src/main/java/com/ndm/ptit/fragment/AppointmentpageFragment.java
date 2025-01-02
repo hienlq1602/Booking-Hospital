@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
@@ -42,8 +43,8 @@ public class AppointmentpageFragment extends Fragment {
     private LinearLayout lytNoAppointment;
 
     private boolean isLoading = false;
-    private int currentPage = 1;
-    private final int pageSize = 10;
+    private int size = 5;
+    private int page = 1;
 
     private AppointmentRecyclerView appointmentAdapter;
     private List<Appointment> appointmentsList = new ArrayList<>();
@@ -54,7 +55,7 @@ public class AppointmentpageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_appointmentpage, container, false);
         setupComponent(view);
         setupRecyclerView();
-        fetchAppointment(currentPage);
+        fetchAppointment(page); // Gọi API lần đầu
         return view;
     }
 
@@ -68,6 +69,8 @@ public class AppointmentpageFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
+        appointmentRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
         appointmentAdapter = new AppointmentRecyclerView(context, appointmentsList);
         appointmentRecyclerView.setAdapter(appointmentAdapter);
         appointmentRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -76,8 +79,8 @@ public class AppointmentpageFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1) && !isLoading) {
                     isLoading = true;
-                    currentPage++;
-                    fetchAppointment(currentPage);
+                    page++;
+                    fetchAppointment(page);
                 }
             }
         });
@@ -92,15 +95,12 @@ public class AppointmentpageFragment extends Fragment {
             return;
         }
 
-        AppointmentRequest appointmentRequest = new AppointmentRequest(pageSize, page);
-
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        Call<BaseResponse<Appointment>> call = apiService.getAllAppointment("Bearer " + token, appointmentRequest);
+        Call<BaseResponse<Appointment>> call = apiService.getAllAppointment("Bearer " + token, size, page);
 
         call.enqueue(new Callback<BaseResponse<Appointment>>() {
             @Override
             public void onResponse(Call<BaseResponse<Appointment>> call, Response<BaseResponse<Appointment>> response) {
-
                 isLoading = false;
 
                 if (response.isSuccessful()) {
@@ -111,8 +111,6 @@ public class AppointmentpageFragment extends Fragment {
                         if (newAppointments != null && !newAppointments.isEmpty()) {
                             lytNoAppointment.setVisibility(View.GONE);
                             appointmentRecyclerView.setVisibility(View.VISIBLE);
-
-                            // Thêm dữ liệu mới vào danh sách và thông báo adapter
                             appointmentsList.addAll(newAppointments);
                             appointmentAdapter.notifyDataSetChanged();
                         } else if (appointmentsList.isEmpty()) {

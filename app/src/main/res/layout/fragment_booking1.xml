@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Bookingpage.BookingFragment1">
+    android:orientation="vertical" >
 
     <!-- SERVICE INFO -->
     <LinearLayout
@@ -70,7 +69,7 @@
 
             <!-- BOOKING NAME -->
             <EditText
-                android:text="PhongKaster"
+                android:text=""
                 android:id="@+id/txtBookingName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.Model.Doctor;
 //import com.example.do_an_tot_nghiep.R;
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.DoctorpageActivity;
 import com.ndm.ptit.enitities.Doctor;
+import com.ndm.ptit.enitities.services.DoctorService;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,9 +28,9 @@ import java.util.List;
 public class DoctorRecyclerView extends RecyclerView.Adapter<DoctorRecyclerView.ViewHolder> {
 
     private final Context context;
-    private final List<Doctor> list;
+    private final List<DoctorService> list;
 
-    public DoctorRecyclerView(Context context, List<Doctor> list)
+    public DoctorRecyclerView(Context context, List<DoctorService> list)
     {
         this.context = context;
         this.list = list;
@@ -46,29 +48,31 @@ public class DoctorRecyclerView extends RecyclerView.Adapter<DoctorRecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Doctor element = list.get(position);
-//        String uploadUri = Constant.UPLOAD_URI();
+        DoctorService element = list.get(position);
 
         int id = element.getId();
-        String speciality = context.getString(R.string.speciality) + " " + element.getSpeciality().getName();
+
+        String specialityName = element.getSpecialityId() != null ? element.getSpecialityId().getName() : "Không xác định";
+        String speciality = context.getString(R.string.speciality) + " " + specialityName;
+
         String name = context.getString(R.string.doctor) + " " + element.getName();
-//        @SuppressLint("ResourceType") String image = element.getAvatar().length() > 0 ?
-//                uploadUri + element.getAvatar() : context.getString(R.drawable.default_speciality);
 
+        if (element.getAvatar() != null && !element.getAvatar().isEmpty()) {
+            Picasso.get().load(element.getAvatar()).placeholder(R.drawable.default_avatar).into(holder.image);
+        } else {
+            holder.image.setImageResource(R.drawable.default_avatar);
+        }
 
-//        if( element.getAvatar().length() > 0)
-//        {
-//            Picasso.get().load(image).into(holder.image);
-//        }
-
-//        holder.speciality.setText(speciality);
         holder.name.setText(name);
-        holder.layout.setOnClickListener(view->{
-//            Intent intent = new Intent(context, DoctorpageActivity.class);
-//            intent.putExtra("doctorId", String.valueOf(id));
-//            context.startActivity(intent);
+        holder.speciality.setText(speciality);
+
+        holder.layout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DoctorpageActivity.class);
+            intent.putExtra("doctorId", String.valueOf(id));
+            context.startActivity(intent);
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -80,7 +84,7 @@ public class DoctorRecyclerView extends RecyclerView.Adapter<DoctorRecyclerView.
         private final LinearLayout layout;
         private final ImageView image;
         private final TextView name;
-//        private final TextView speciality;
+        private final TextView speciality;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -88,7 +92,7 @@ public class DoctorRecyclerView extends RecyclerView.Adapter<DoctorRecyclerView.
             layout = itemView.findViewById(R.id.elementLayout);
             image = itemView.findViewById(R.id.elementImage);
             name = itemView.findViewById(R.id.elementName);
-//            speciality = itemView.findViewById(R.id.elementSpeciality);
+            speciality = itemView.findViewById(R.id.elementSpeciality);
         }
     }
 }

@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.LogInActivity;
+import com.ndm.ptit.activity.SearchpageActivity;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
@@ -49,9 +50,11 @@ import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.Handbook;
 import com.ndm.ptit.enitities.Setting;
 import com.ndm.ptit.enitities.Speciality;
+import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.recyclerview.ButtonRecyclerView;
 import com.ndm.ptit.recyclerview.DoctorRecyclerView;
+import com.ndm.ptit.recyclerview.DoctorRecyclerViewSpeciality;
 import com.ndm.ptit.recyclerview.HandbookRecyclerView;
 import com.ndm.ptit.recyclerview.SpecialityRecyclerView;
 
@@ -73,11 +76,8 @@ import retrofit2.Retrofit;
  * @since 17-11-2022
  * Home fragment
  */
-public class MainFragment extends Fragment{
-
-
+public class MainFragment extends Fragment {
     private final String TAG = "Home Fragment";
- //   private GlobalVariable globalVariable;
 
     private RecyclerView recyclerViewSpeciality;
     private RecyclerView recyclerViewDoctor;
@@ -113,21 +113,15 @@ public class MainFragment extends Fragment{
         setupRecyclerViewRecommendedPages();
 
         fetchSpecialities();
+        fetchDoctors();
 
         return view;
     }
 
 
-
-    /**
-     * @since 17-11-2022
-     * setup component
-     */
-    private void setupComponent(View view)
-    {
+    private void setupComponent(View view) {
         context = requireContext();
-    //    globalVariable = (GlobalVariable) requireActivity().getApplication();
-
+        //    globalVariable = (GlobalVariable) requireActivity().getApplication();
 
         recyclerViewSpeciality = view.findViewById(R.id.recyclerViewSpeciality);
         recyclerViewDoctor = view.findViewById(R.id.recyclerViewDoctor);
@@ -143,62 +137,8 @@ public class MainFragment extends Fragment{
         txtDate = view.findViewById(R.id.txtDate);
     }
 
-    /**
-     * @since 17-11-2022
-     * setup View model
-     */
-//    private void setupViewModel()
-//    {
-//        /*Step 1 - declare*/
-//        HomepageViewModel viewModel = new ViewModelProvider(this).get(HomepageViewModel.class);
-//        viewModel.instantiate();
-//
-//        /*Step 2 - prepare header & parameters*/
-//        Map<String, String> header = globalVariable.getHeaders();
-//        header.put("type", "patient");
-//
-//
-//        /*Step 3 - listen speciality Read All */
-//        Map<String, String> paramsSpeciality = new HashMap<>();
-//        viewModel.specialityReadAll(header, paramsSpeciality);
-//
-//        viewModel.getSpecialityReadAllResponse().observe(getViewLifecycleOwner(), response->{
-//            int result = response.getResult();
-//            if( result == 1)
-//            {
-//                List<Speciality> list = response.getData();
-//                setupRecyclerViewSpeciality(list);
-//            }
-//        });
-//
-//        /*Step 4 - listen doctor read all*/
-//        Map<String, String> paramsDoctor = new HashMap<>();
-//        viewModel.doctorReadAll(header, paramsDoctor);
-//
-////        for (Map.Entry<String,String> entry : paramsDoctor.entrySet())
-////            System.out.println("Key = " + entry.getKey() +
-////                    ", Value = " + entry.getValue());
-////
-////        for (Map.Entry<String,String> entry : header.entrySet())
-////            System.out.println("Key = " + entry.getKey() +
-////                    ", Value = " + entry.getValue());
-//
-//        viewModel.getDoctorReadAllResponse().observe(getViewLifecycleOwner(), response->{
-//            int result = response.getResult();
-//            if( result == 1)
-//            {
-//                List<Doctor> list = response.getData();
-//                setupRecyclerViewDoctor(list);
-//            }
-//        });
-//    }
 
-    /**
-     * @since 17-11-2022
-     * setup recycler view speciality
-     */
-    private void setupRecyclerViewSpeciality(List<SpecialityResponse> list)
-    {
+    private void setupRecyclerViewSpeciality(List<SpecialityResponse> list) {
         SpecialityRecyclerView specialityAdapter = new SpecialityRecyclerView(requireActivity(), list, R.layout.recycler_view_element_speciality);
         recyclerViewSpeciality.setAdapter(specialityAdapter);
 
@@ -207,13 +147,8 @@ public class MainFragment extends Fragment{
     }
 
 
-    /**
-     * @since 17-11-2022
-     * setup recycler view doctor
-     */
-    private void setupRecyclerViewDoctor(List<Doctor> list)
-    {
-        DoctorRecyclerView doctorAdapter = new DoctorRecyclerView(requireActivity(), list);
+    private void setupRecyclerViewDoctor(List<DoctorService> list) {
+        DoctorRecyclerViewSpeciality doctorAdapter = new DoctorRecyclerViewSpeciality(requireActivity(), list);
         recyclerViewDoctor.setAdapter(doctorAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -226,46 +161,41 @@ public class MainFragment extends Fragment{
      * setup event for buttons
      */
     @SuppressLint({"UnspecifiedImmutableFlag", "ShortAlarm"})
-    private void setupEvent()
-    {
+    private void setupEvent() {
         /*SEARCH BAR*/
-        searchBar.setOnClickListener(view->{
-//            Intent intent = new Intent(requireContext(), SearchpageActivity.class);
-//            startActivity(intent);
+        searchBar.setOnClickListener(view -> {
+            Intent intent = new Intent(requireContext(), SearchpageActivity.class);
+            startActivity(intent);
         });
 
 
         /*TXT READ MORE SPECIALITY*/
-        txtReadMoreSpeciality.setOnClickListener(view->{
-//            Intent intent = new Intent(context, SearchpageActivity.class);
-//            String filterKey  = context.getString(R.string.speciality);
-//
-//            intent.putExtra("filterKey", filterKey );
-//            startActivity(intent);
+        txtReadMoreSpeciality.setOnClickListener(view -> {
+            Intent intent = new Intent(context, SearchpageActivity.class);
+            String filterKey = context.getString(R.string.speciality);
+
+            intent.putExtra("filterKey", filterKey);
+            startActivity(intent);
         });
 
         /*TXT READ MORE DOCTOR*/
-        txtReadMoreDoctor.setOnClickListener(view->{
-//            Intent intent = new Intent(context, SearchpageActivity.class);
-//            String filterKey  = context.getString(R.string.doctor);
-//
-//            intent.putExtra("filterKey", filterKey );
-//            startActivity(intent);
+        txtReadMoreDoctor.setOnClickListener(view -> {
+            Intent intent = new Intent(context, SearchpageActivity.class);
+            String filterKey = context.getString(R.string.doctor);
+
+            intent.putExtra("filterKey", filterKey);
+            startActivity(intent);
         });
     }
 
-    /**
-     * @since 20-12-2022
-     * setup recycler view button
-     */
-    private void setupRecyclerViewButton()
-    {
-        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "specialityExamination", getString(R.string.speciality_examination) );
-        Setting setting1 = new Setting(R.drawable.ic_exam_general, "generalExamination", getString(R.string.general_examination) );
-        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "heartExamination", getString(R.string.heart_examination) );
-        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "pregnantExamination", getString(R.string.pregnant_examination) );
+
+    private void setupRecyclerViewButton() {
+        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "specialityExamination", getString(R.string.speciality_examination));
+        Setting setting1 = new Setting(R.drawable.ic_exam_general, "generalExamination", getString(R.string.general_examination));
+        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "heartExamination", getString(R.string.heart_examination));
+        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "pregnantExamination", getString(R.string.pregnant_examination));
         Setting setting4 = new Setting(R.drawable.ic_exam_tooth, "toothExamination", context.getString(R.string.tooth_examination));
-        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "eyeExamination", getString(R.string.eye_examination) );
+        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "eyeExamination", getString(R.string.eye_examination));
         Setting setting6 = new Setting(R.drawable.ic_exam_medical_test, "medicalTestExamination", context.getString(R.string.medical_test_examination));
         Setting setting7 = new Setting(R.drawable.ic_exam_covid19, "covid19", context.getString(R.string.covid19_examination));
 
@@ -290,8 +220,7 @@ public class MainFragment extends Fragment{
      * @since 20-12-2022
      * setup recycler view handbook
      */
-    private void setupRecyclerViewHandbook()
-    {
+    private void setupRecyclerViewHandbook() {
         Handbook handbook0 = new Handbook(
                 "https://static-images.vnncdn.net/files/publish/2022/12/20/benh-vien-viet-duc-290.jpg",
                 "Ba tiếng chờ đợi, 10 phút khám - Xếp hàng dài, căng tai nghe để không mất lượt",
@@ -402,8 +331,7 @@ public class MainFragment extends Fragment{
      * @since 20-12-2022
      * setup recycler view recommended pages
      */
-    private void setupRecyclerViewRecommendedPages()
-    {
+    private void setupRecyclerViewRecommendedPages() {
         Handbook handbook0 = new Handbook(
                 "https://suckhoedoisong.qltns.mediacdn.vn/thumb_w/1200/324455921873985536/2021/10/10/baoskds-1633861575912643818497-49-0-295-393-crop-1633861583124643700229.png",
                 "Báo sức khỏe đời sống - cơ quan ngôn luận của Bộ Y tế",
@@ -472,10 +400,31 @@ public class MainFragment extends Fragment{
         });
     }
 
+    private void fetchDoctors() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
 
-    /**
-     * @since 22-12-2022
-     */
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<BaseResponse<DoctorService>> call = apiService.doctorReadAll("Bearer " + token);
+        call.enqueue(new Callback<BaseResponse<DoctorService>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<DoctorService>> call, Response<BaseResponse<DoctorService>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<DoctorService> allDoctors = response.body().getData();
+                    setupRecyclerViewDoctor(allDoctors);
+                } else {
+                    DialogUtils.showErrorDialog(getContext(), "Request failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<DoctorService>> call, Throwable t) {
+                Log.d("vao day safasf", "asfasf");
+            }
+        });
+    }
+
+
 //    private void getCurrentWeather()
 //    {
 //        Retrofit service = HTTPService.getOpenWeatherMapInstance();

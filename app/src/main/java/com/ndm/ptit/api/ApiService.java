@@ -46,7 +46,7 @@ public interface ApiService {
     @POST("api/login")
     Call<LoginRespone> login(@Body LoginRequest loginRequest);
 
-    @POST("api/signup")
+    @POST("api/login")
     Call<SignUpResponse> signup(@Body SignUpRequest signUpRequest);
 
     @GET("api/specialities")
@@ -74,7 +74,7 @@ public interface ApiService {
     );
 
     @GET("api/treatments/{id}")
-    Call<BaseResponse<Treatment>> getTreatmentByID(
+    Call<BaseResponse2<Treatment>> getTreatmentByID(
             @Header("Authorization") String token,
             @Path("id") int id
     );

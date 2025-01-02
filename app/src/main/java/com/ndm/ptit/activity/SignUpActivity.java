@@ -73,7 +73,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 SignUpRequest request = new SignUpRequest();
                 request.setEmail("user@gmail.com");
-                request.setType("patient");
                 request.setPhone(phone);
                 request.setPassword(password);
                 request.setPasswordConfirm(confirmPassword);

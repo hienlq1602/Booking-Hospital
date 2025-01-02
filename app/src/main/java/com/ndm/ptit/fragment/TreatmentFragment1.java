@@ -23,7 +23,6 @@ import com.ndm.ptit.activity.RecordpageActivity;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
-import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.record.RecordRespone;
 import com.ndm.ptit.enitities.treatment.Treatment;
@@ -99,18 +98,18 @@ public class TreatmentFragment1 extends Fragment {
         }
 
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        Call<BaseResponse<Treatment>> call = apiService.getTreatmentByID("Bearer " + token, id);
+        Call<BaseResponse2<Treatment>> call = apiService.getTreatmentByID("Bearer " + token, id);
 
-        call.enqueue(new Callback<BaseResponse<Treatment>>() {
+        call.enqueue(new Callback<BaseResponse2<Treatment>>() {
             @Override
-            public void onResponse(Call<BaseResponse<Treatment>> call, Response<BaseResponse<Treatment>> response) {
+            public void onResponse(Call<BaseResponse2<Treatment>> call, Response<BaseResponse2<Treatment>> response) {
                 if (response.isSuccessful()) {
-                    BaseResponse<Treatment> recordResponse = response.body();
+                    BaseResponse2<Treatment> recordResponse = response.body();
                     if (recordResponse != null && recordResponse.getResult() == 1) {
                         // Bổ sung đoạn này để hiển thị danh sách
-                        List<Treatment> arr = new ArrayList<>(recordResponse.getData());
-//                        Treatment treatments = recordResponse.getData();
-//                        arr.add((treatments));
+                        List<Treatment> arr = new ArrayList<>();
+                        Treatment treatments = recordResponse.getData();
+                        arr.add((treatments));
                         setupRecyclerView(arr);
                     } else {
                         String errorMessage = recordResponse != null ? recordResponse.getMsg() : "Unknown error";
@@ -123,7 +122,7 @@ public class TreatmentFragment1 extends Fragment {
 
 
             @Override
-            public void onFailure(Call<BaseResponse<Treatment>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse2<Treatment>> call, Throwable t) {
                 Log.d(TAG, Objects.requireNonNull(t.getMessage()));
                 DialogUtils.showErrorDialog(getContext(), "Error: " + t.getMessage());
             }

@@ -71,11 +71,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * @author Phong-Kaster
- * @since 17-11-2022
- * Home fragment
- */
 public class MainFragment extends Fragment {
     private final String TAG = "Home Fragment";
 

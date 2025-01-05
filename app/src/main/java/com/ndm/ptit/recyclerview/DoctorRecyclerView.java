@@ -2,7 +2,6 @@ package com.ndm.ptit.recyclerview;
 
 import static com.ndm.ptit.utils.Utils.BASE_URL;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -22,10 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.R;
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.DoctorpageActivity;
-import com.ndm.ptit.dialogs.DialogUtils;
-import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.services.DoctorService;
-import com.ndm.ptit.helper.Dialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

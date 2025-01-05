@@ -18,45 +18,31 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
 
 
 import com.ndm.ptit.R;
-import com.ndm.ptit.activity.ServicepageActivity;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
-import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.login.LoginRespone;
-import com.ndm.ptit.enitities.services.DoctorService;
-import com.ndm.ptit.enitities.services.DoctorServiceResponse;
 import com.ndm.ptit.enitities.services.Services;
 import com.ndm.ptit.enitities.services.ServicesResponse;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
-import com.ndm.ptit.helper.Tooltip;
 import com.ndm.ptit.utils.Utils;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class  BookingFragment1 extends Fragment {
@@ -70,7 +56,7 @@ public class  BookingFragment1 extends Fragment {
     private String doctorAvatar;// doctorId == null thì nó sẽ bằng 0, vì chúng ta không cần
     private LoadingScreen loadingScreen;
 
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
 
     private ImageView imgDoctorAvatar;
     private TextView txtServiceName;
@@ -115,7 +101,7 @@ public class  BookingFragment1 extends Fragment {
 
 
         loadingScreen = new LoadingScreen(activity);
-        dialog = new Dialog(context);
+        dialogCus = new Dialog_cus(context);
         LoginRespone user = Utils.user;
 
         Bundle bundle = getArguments();
@@ -307,9 +293,9 @@ public class  BookingFragment1 extends Fragment {
 
         for (String element : requiredFields) {
             if (TextUtils.isEmpty(element)) {
-                dialog.announce();
-                dialog.show(R.string.attention, context.getString(R.string.you_do_not_fill_mandatory_field_try_again), R.drawable.ic_info);
-                dialog.btnOK.setOnClickListener(view -> dialog.close());
+                dialogCus.announce();
+                dialogCus.show(R.string.attention, context.getString(R.string.you_do_not_fill_mandatory_field_try_again), R.drawable.ic_info);
+                dialogCus.btnOK.setOnClickListener(view -> dialogCus.close());
                 return false;
             }
         }

@@ -20,7 +20,7 @@ import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.record.RecordRespone;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 
 import java.util.Objects;
@@ -34,7 +34,7 @@ public class RecordpageActivity extends AppCompatActivity {
     private final String TAG = "Record-page activity";
     private String appointmentId;
 
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private LoadingScreen loadingScreen;
 
     private ImageView imgDoctorAvatar;
@@ -58,16 +58,16 @@ public class RecordpageActivity extends AppCompatActivity {
     }
 
     private void setupComponent() {
-        dialog = new Dialog(this);
+        dialogCus = new Dialog_cus(this);
         loadingScreen = new LoadingScreen(this);
 
         appointmentId = getIntent().getStringExtra("appointmentId");
         if (TextUtils.isEmpty(appointmentId)) {
             Log.d(TAG, "appointmentId is empty !");
-            dialog.announce();
-            dialog.show(R.string.attention, getString(R.string.oops_there_is_an_issue), R.drawable.ic_close);
-            dialog.btnOK.setOnClickListener(view -> {
-                dialog.close();
+            dialogCus.announce();
+            dialogCus.show(R.string.attention, getString(R.string.oops_there_is_an_issue), R.drawable.ic_close);
+            dialogCus.btnOK.setOnClickListener(view -> {
+                dialogCus.close();
                 this.finish();
             });
         }

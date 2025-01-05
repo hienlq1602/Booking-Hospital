@@ -2,8 +2,6 @@ package com.ndm.ptit.activity;
 
 
 import static com.ndm.ptit.utils.Utils.BASE_URL;
-import static com.ndm.ptit.utils.Utils.user;
-import static java.security.AccessController.getContext;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,7 +12,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -27,20 +24,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
-import com.ndm.ptit.dialogs.DialogUtils;
-import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
 
-import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.enitities.login.Patient;
-import com.ndm.ptit.enitities.speciality.SpecialityResponse;
-import com.ndm.ptit.fragment.SettingsFragment;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 
 import com.ndm.ptit.helper.Tooltip;
@@ -80,7 +71,7 @@ public class InformationActivity extends AppCompatActivity {
     private TextView txtUpdateAt;
 
     private AppCompatButton btnSave;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private LoadingScreen loadingScreen;
 
     private Uri uriAvatar;
@@ -122,7 +113,7 @@ public class InformationActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnUploadAvatar = findViewById(R.id.btnAvatarUpload);
 
-        dialog = new Dialog(this);
+        dialogCus = new Dialog_cus(this);
         loadingScreen = new LoadingScreen(this);
     }
     Intent intent;

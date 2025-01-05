@@ -33,6 +33,7 @@ import com.ndm.ptit.activity.AlarmpageActivity;
 import com.ndm.ptit.activity.AppearanceActivity;
 import com.ndm.ptit.activity.BookingHistoryActivity;
 import com.ndm.ptit.activity.EmailpageActivity;
+import com.ndm.ptit.activity.GuidepageActivity2;
 import com.ndm.ptit.activity.InformationActivity;
 import com.ndm.ptit.activity.LogInActivity;
 import com.ndm.ptit.activity.WebpageActivity;
@@ -112,8 +113,8 @@ public class SettingRecyclerView extends RecyclerView.Adapter<SettingRecyclerVie
                     context.startActivity(intent);
                     break;
                 case "guide":
-//                    intent = new Intent(context, GuidepageActivity.class);
-//                    context.startActivity(intent);
+                    intent = new Intent(context, GuidepageActivity2.class);
+                    context.startActivity(intent);
                     break;
                 case "reminder":
                     intent = new Intent(context, AlarmpageActivity.class);

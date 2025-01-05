@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ndm.ptit.R;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 
 
 /**
@@ -26,7 +26,7 @@ public class EmailFragment2 extends Fragment {
     private String txtContent;
     private AppCompatButton btnSend;
 
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,16 +37,16 @@ public class EmailFragment2 extends Fragment {
         setupComponent(view);
 
         /*GET DATA FROM EMAIL FRAGMENT 1*/
-        dialog = new Dialog(requireContext());
-        dialog.announce();
-        dialog.btnOK.setOnClickListener(view1->{
+        dialogCus = new Dialog_cus(requireContext());
+        dialogCus.announce();
+        dialogCus.btnOK.setOnClickListener(view1->{
             requireActivity().getSupportFragmentManager().popBackStack();
         });
 
         Bundle bundle = this.getArguments();
         if( bundle == null)
         {
-            dialog.show(R.string.attention, requireContext().getString(R.string.oops_there_is_an_issue), R.drawable.ic_close);
+            dialogCus.show(R.string.attention, requireContext().getString(R.string.oops_there_is_an_issue), R.drawable.ic_close);
         }
         else
         {

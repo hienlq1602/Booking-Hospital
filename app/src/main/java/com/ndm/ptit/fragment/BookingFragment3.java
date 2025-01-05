@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +14,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
@@ -32,13 +37,14 @@ import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.booking.Booking;
 import com.ndm.ptit.enitities.booking.BookingImage;
-import com.ndm.ptit.helper.Dialog;
+
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.BookingPhotoRecyclerView;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,13 +62,14 @@ public class BookingFragment3 extends Fragment {
     private AppCompatButton btnNext, btnUpload;
     private RecyclerView recyclerView;
     private BookingPhotoRecyclerView adapter;
+    BookingImage bookingImage = new BookingImage();
 
     private LinearLayout layout;
     private Context context;
     private Activity activity;
 
     private LoadingScreen loadingScreen;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private List<BookingImage> list = new ArrayList<>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -99,7 +106,7 @@ public class BookingFragment3 extends Fragment {
 
         context = requireContext();
         activity = requireActivity();
-        dialog = new Dialog(context);
+        dialogCus = new Dialog_cus(context);
         loadingScreen = new LoadingScreen(activity);
 
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -134,6 +141,50 @@ public class BookingFragment3 extends Fragment {
                 adapter.notifyItemRemoved(position);
             }
         });
+
+        //-------------------------------------------------Click to view image----------------------------------//
+        recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(recyclerView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+            });
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    int position = rv.getChildAdapterPosition(child);
+//                    Toast.makeText(rv.getContext(), "Clicked: " + position, Toast.LENGTH_SHORT).show();
+                    Dialog dialog = new Dialog(requireContext());
+                    dialog.setContentView(R.layout.dialog_image_view);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                // Tìm ImageView trong Dialog và tải ảnh vào
+                    ImageView dialogImageView = dialog.findViewById(R.id.dialogImageView);
+//                    for (BookingImage image : list) {
+//                        Uri fileUri = Uri.parse(image.getUrl());
+//                        Picasso.get()
+//                                .load(fileUri)
+//                                .into(dialogImageView);
+//
+//                        dialog.show();
+//                    }
+                    Uri fileUri = Uri.parse(list.get(position).getUrl());
+                    Picasso.get()
+                            .load(fileUri)
+                            .into(dialogImageView);
+
+                    dialog.show();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        //-------------------------------------------------Click to view image----------------------------------//
 
         // Gán ItemTouchHelper cho RecyclerView
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -273,7 +324,7 @@ public class BookingFragment3 extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            BookingImage bookingImage = new BookingImage();
+//            BookingImage bookingImage = new BookingImage();
             bookingImage.setUrl(selectedImageUri.toString());
             list.add(bookingImage);
             adapter.notifyItemInserted(list.size() - 1);

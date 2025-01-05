@@ -67,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
 //        Tooltip.setLocale(this, sharedPreferences);
     }
 
-    /**
-     * @since 17-11-2022
-     * setup variable
-     */
     private void setupVariable() {
 //        globalVariable = (GlobalVariable) this.getApplication();
         dialog = new Dialog(this);

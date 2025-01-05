@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.ndm.ptit.R;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 
 
 /**
@@ -26,7 +26,7 @@ public class EmailFragment1 extends Fragment {
     private EditText txtContent;
 
     private AppCompatButton btnNext;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class EmailFragment1 extends Fragment {
         txtContent = view.findViewById(R.id.txtContent);
         txtDescription = view.findViewById(R.id.txtDescription);
         btnNext = view.findViewById(R.id.btnNext);
-        dialog = new Dialog(requireContext());
+        dialogCus = new Dialog_cus(requireContext());
     }
 
     /**
@@ -63,11 +63,11 @@ public class EmailFragment1 extends Fragment {
             String description = txtDescription.getText().toString();
 
 
-            dialog.announce();
-            dialog.btnOK.setOnClickListener(view1->dialog.close());
+            dialogCus.announce();
+            dialogCus.btnOK.setOnClickListener(view1-> dialogCus.close());
             if(TextUtils.isEmpty(title) || TextUtils.isEmpty(content) || TextUtils.isEmpty(description))
             {
-                dialog.show(R.string.attention, requireContext().getString(R.string.you_are_missing_mandatory_field), R.drawable.ic_close);
+                dialogCus.show(R.string.attention, requireContext().getString(R.string.you_are_missing_mandatory_field), R.drawable.ic_close);
                 return;
             }
 

@@ -18,19 +18,13 @@ import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse2;
-import com.ndm.ptit.enitities.Speciality;
-import com.ndm.ptit.enitities.doctor.DoctorResponse;
 import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.services.DoctorServiceResponse;
-import com.ndm.ptit.enitities.services.Services;
-import com.ndm.ptit.enitities.services.ServicesResponse;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.GlobalVariable;
 import com.ndm.ptit.helper.LoadingScreen;
-import com.ndm.ptit.recyclerview.DoctorRecyclerView;
 import com.ndm.ptit.recyclerview.DoctorRecyclerViewSpeciality;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,7 +44,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
     private String specialityId;
 
     private LoadingScreen loadingScreen;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private ImageView imgAvatar;
 
     private ImageButton btnBack;
@@ -90,7 +84,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
 
 
         loadingScreen = new LoadingScreen(this);
-        dialog = new Dialog(this);
+        dialogCus = new Dialog_cus(this);
         imgAvatar = findViewById(R.id.imgAvatar);
 
         btnBack = findViewById(R.id.btnBack);

@@ -20,8 +20,7 @@ import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.appointment.Appointment;
-import com.ndm.ptit.enitities.appointment.AppointmentRequest;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.AppointmentRecyclerView;
 
@@ -38,7 +37,7 @@ public class AppointmentpageFragment extends Fragment {
     private RecyclerView appointmentRecyclerView;
     private Context context;
     private Activity activity;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private LoadingScreen loadingScreen;
     private LinearLayout lytNoAppointment;
 
@@ -63,7 +62,7 @@ public class AppointmentpageFragment extends Fragment {
         context = requireContext();
         activity = requireActivity();
         loadingScreen = new LoadingScreen(activity);
-        dialog = new Dialog(context);
+        dialogCus = new Dialog_cus(context);
         lytNoAppointment = view.findViewById(R.id.lytNoAppointment);
         appointmentRecyclerView = view.findViewById(R.id.recyclerView);
     }

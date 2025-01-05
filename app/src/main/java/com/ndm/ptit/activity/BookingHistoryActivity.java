@@ -16,7 +16,7 @@ import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.booking.Booking;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.BookingRecyclerView;
 
@@ -31,7 +31,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
     private final String TAG = "Booking History Activity";
     private ImageButton btnBack;
     private RecyclerView bookingRecyclerView;
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private LoadingScreen loadingScreen;
     private SharedPreferences sharedPreferences;
 
@@ -49,7 +49,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
     private void setupComponent() {
         btnBack = findViewById(R.id.btnBack);
         bookingRecyclerView = findViewById(R.id.bookingRecyclerView);
-        dialog = new Dialog(this);
+        dialogCus = new Dialog_cus(this);
         loadingScreen = new LoadingScreen(this);
         sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
     }

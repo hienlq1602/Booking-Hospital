@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.GuidepageActivity2;
 import com.ndm.ptit.activity.MainActivity;
 
 
@@ -47,9 +48,9 @@ public class BookingFragment2 extends Fragment {
         });
 
         btnHowToExam.setOnClickListener(view->{
-//            Intent intent = new Intent(requireContext(), GuidepageActivity.class);
-//            startActivity(intent);
-//            requireActivity().finish();
+            Intent intent = new Intent(requireContext(), GuidepageActivity2.class);
+            startActivity(intent);
+            requireActivity().finish();
         });
     }
 }

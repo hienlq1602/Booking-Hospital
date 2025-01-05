@@ -18,12 +18,23 @@ public class Booking {
     private String createAt;
     private String updateAt;
     private Service service;
+    private Doctor doctor;
 
     // Constructor mặc định
     public Booking() {
     }
 
     // Getters và Setters
+
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
     public int getId() {
         return id;
     }

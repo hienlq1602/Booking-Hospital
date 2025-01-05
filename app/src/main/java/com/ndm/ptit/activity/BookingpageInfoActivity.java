@@ -2,16 +2,22 @@ package com.ndm.ptit.activity;
 
 import static com.ndm.ptit.utils.Utils.BASE_URL;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,11 +30,13 @@ import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.BaseResponse3;
 import com.ndm.ptit.enitities.booking.Booking;
 import com.ndm.ptit.enitities.booking.BookingImage;
-import com.ndm.ptit.helper.Dialog;
+import com.ndm.ptit.helper.Dialog_cus;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.recyclerview.BookingPhotoRecyclerView;
 import com.ndm.ptit.utils.Utils;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,15 +50,16 @@ public class BookingpageInfoActivity extends AppCompatActivity {
     private String bookingId;
     private String bookingStatus;
     private Booking service;
+    private List<BookingImage> list = new ArrayList<>();
 
-    private TextView txtBookingName, txtBookingPhone, txtPatientName, txtPatientGender;
+    private TextView txtBookingName, txtBookingPhone, txtPatientName, txtPatientGender,txtDoctorName;
     private TextView txtPatientBirthday, txtPatientAddress, txtPatientReason, txtDatetime;
     private TextView txtBookingStatus, txtServiceName;
     private ImageView imgDoctorAvatar;
     private androidx.appcompat.widget.AppCompatButton  btnCancel;
     private ImageButton btnBack;
 
-    private Dialog dialog;
+    private Dialog_cus dialogCus;
     private LoadingScreen loadingScreen;
 
     private BookingPhotoRecyclerView bookingPhotoAdapter;
@@ -64,16 +73,18 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         fetchBooking();
         fetchBookingImage();
         setupBackButton();
+
     }
 
     private void setupComponent() {
         bookingId = getIntent().getStringExtra("id");
 
-        dialog = new Dialog(this);
+        dialogCus = new Dialog_cus(this);
         loadingScreen = new LoadingScreen(this);
 
 
         txtBookingName = findViewById(R.id.txtBookingName);
+        txtDoctorName = findViewById(R.id.txtDoctorName);
         txtBookingPhone = findViewById(R.id.txtBookingPhone);
         txtPatientName = findViewById(R.id.txtPatientName);
         txtPatientAddress = findViewById(R.id.txtPatientAddress);
@@ -90,6 +101,52 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         txtServiceName = findViewById(R.id.txtServiceName);
 
         recyclerView = findViewById(R.id.recyclerView);
+    }
+    private void setupRecyclerView() {
+
+        //-------------------------------------------------Click to view image----------------------------------//
+        recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(recyclerView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+            });
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    int position = rv.getChildAdapterPosition(child);
+//                    Toast.makeText(rv.getContext(), "Clicked: " + position, Toast.LENGTH_SHORT).show();
+                    Dialog dialog = new Dialog(BookingpageInfoActivity.this);
+                    dialog.setContentView(R.layout.dialog_image_view);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    // Tìm ImageView trong Dialog và tải ảnh vào
+                    ImageView dialogImageView = dialog.findViewById(R.id.dialogImageView);
+//                    for (BookingImage image : list) {
+//                        Uri fileUri = Uri.parse(image.getUrl());
+//                        Picasso.get()
+//                                .load(fileUri)
+//                                .into(dialogImageView);
+//
+//                        dialog.show();
+//                    }
+                    Uri fileUri = Uri.parse(list.get(position).getUrl());
+                    Picasso.get()
+                            .load(fileUri)
+                            .into(dialogImageView);
+
+                    dialog.show();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        //-------------------------------------------------Click to view image----------------------------------//
     }
 
     private void fetchBooking() {
@@ -111,6 +168,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
                     BaseResponse2<Booking> bookingResponse = response.body();
                     if (bookingResponse != null && bookingResponse.getResult() == 1) {
                         bindData(bookingResponse.getData());
+
 
                     } else {
                         String errorMessage = bookingResponse != null ? bookingResponse.getMsg() : "Unknown error";
@@ -149,6 +207,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
                     BaseResponse<BookingImage> bookingResponse = response.body();
                     if (bookingResponse != null && bookingResponse.getResult() == 1) {
                         for(BookingImage item : bookingResponse.getData()){
+                            list = bookingResponse.getData();
                             String uploadUrl  = BASE_URL + item.getUrl();
                             item.setUrl(uploadUrl);
                         }
@@ -215,6 +274,10 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         txtPatientReason.setText(booking.getReason());
         txtBookingStatus.setText(booking.getStatus());
         txtServiceName.setText(booking.getService().getName());
+        txtDoctorName.setText("Bác sĩ " + booking.getDoctor().getName());
+        if (booking.getDoctor().getAvatar().length() >= 0) {
+            Picasso.get().load(BASE_URL+booking.getDoctor().getAvatar()).placeholder(R.drawable.default_avatar).into(imgDoctorAvatar);
+        }
 
         String status = booking.getStatus();
         bookingStatus = status;
@@ -232,6 +295,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         bookingPhotoAdapter = new BookingPhotoRecyclerView(BookingpageInfoActivity.this, list);
         recyclerView.setAdapter(bookingPhotoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setupRecyclerView();
     }
 
 
@@ -246,10 +310,5 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         }));
     }
 
-//    private void printServiceInformation(Booking service)
-//    {
-//        ser
-//        String name = service.getName();
-//        txtServiceName.setText(name);
-//    }
+
 }

@@ -45,6 +45,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
         fetchBooking();
     }
 
+
     private void setupComponent() {
         btnBack = findViewById(R.id.btnBack);
         bookingRecyclerView = findViewById(R.id.bookingRecyclerView);
@@ -101,6 +102,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        fetchBooking();
         super.onResume();
     }
 }

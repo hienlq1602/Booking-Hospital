@@ -133,7 +133,7 @@ public class MainFragment extends Fragment {
         txtReadMoreSpeciality = view.findViewById(R.id.txtReadMoreSpeciality);
         txtReadMoreDoctor = view.findViewById(R.id.txtReadMoreDoctor);
 
-        txtWeather = view.findViewById(R.id.txtWeather);
+//        txtWeather = view.findViewById(R.id.txtWeather);
         txtDate = view.findViewById(R.id.txtDate);
     }
 
@@ -190,14 +190,14 @@ public class MainFragment extends Fragment {
 
 
     private void setupRecyclerViewButton() {
-        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "specialityExamination", getString(R.string.speciality_examination));
-        Setting setting1 = new Setting(R.drawable.ic_exam_general, "generalExamination", getString(R.string.general_examination));
-        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "heartExamination", getString(R.string.heart_examination));
-        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "pregnantExamination", getString(R.string.pregnant_examination));
-        Setting setting4 = new Setting(R.drawable.ic_exam_tooth, "toothExamination", context.getString(R.string.tooth_examination));
-        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "eyeExamination", getString(R.string.eye_examination));
-        Setting setting6 = new Setting(R.drawable.ic_exam_medical_test, "medicalTestExamination", context.getString(R.string.medical_test_examination));
-        Setting setting7 = new Setting(R.drawable.ic_exam_covid19, "covid19", context.getString(R.string.covid19_examination));
+        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "niềng răng", "niềng răng");
+        Setting setting1 = new Setting(R.drawable.ic_exam_general, "khám xoang", "khám xoang");
+        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "khám điện não đồ", "khám điện não đồ");
+        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "khám sản khoa", "khám sản khoa");
+        Setting setting4 = new Setting(R.drawable.ic_exam_tooth, "khám răng", "khám răng");
+        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "khám mắt", "khám mắt");
+        Setting setting6 = new Setting(R.drawable.ic_exam_medical_test, "chấn thương dây chằng", "chấn thương dây chằng");
+        Setting setting7 = new Setting(R.drawable.ic_exam_covid19, "đau xương khớp", "đau xương khớp");
 
         List<Setting> list = new ArrayList<>();
         list.add(setting0);
@@ -216,10 +216,6 @@ public class MainFragment extends Fragment {
         recyclerViewButton.setLayoutManager(manager);
     }
 
-    /**
-     * @since 20-12-2022
-     * setup recycler view handbook
-     */
     private void setupRecyclerViewHandbook() {
         Handbook handbook0 = new Handbook(
                 "https://static-images.vnncdn.net/files/publish/2022/12/20/benh-vien-viet-duc-290.jpg",

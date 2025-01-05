@@ -6,10 +6,11 @@ public class LoginRespone {
     private String accessToken;
     private Patient data;
 
+
     public LoginRespone() {
     }
 
-    public LoginRespone(int result, String msg, String accessToken, Patient data) {
+    public LoginRespone(int result, String msg, String accessToken, Patient data,String avatar) {
         this.result = result;
         this.msg = msg;
         this.accessToken = accessToken;

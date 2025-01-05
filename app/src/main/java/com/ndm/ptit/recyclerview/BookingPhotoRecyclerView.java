@@ -1,5 +1,7 @@
 package com.ndm.ptit.recyclerview;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -42,7 +44,8 @@ public class BookingPhotoRecyclerView extends RecyclerView.Adapter<BookingPhotoR
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BookingImage element = list.get(position);
-        String url = element.getUrl();
+//        String url = BASE_URL + element.getUrl();
+        String url =  element.getUrl();
 
         Uri uri = Uri.parse(url);
         Picasso.get()

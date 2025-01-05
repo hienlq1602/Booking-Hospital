@@ -1,7 +1,8 @@
 package com.ndm.ptit.activity;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
@@ -41,11 +41,12 @@ public class BookingpageInfoActivity extends AppCompatActivity {
 
     private String bookingId;
     private String bookingStatus;
+    private Booking service;
 
     private TextView txtBookingName, txtBookingPhone, txtPatientName, txtPatientGender;
     private TextView txtPatientBirthday, txtPatientAddress, txtPatientReason, txtDatetime;
     private TextView txtBookingStatus, txtServiceName;
-    private ImageView imgServiceAvatar;
+    private ImageView imgDoctorAvatar;
     private androidx.appcompat.widget.AppCompatButton  btnCancel;
     private ImageButton btnBack;
 
@@ -85,7 +86,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnBack = findViewById(R.id.btnBack);
 
-        imgServiceAvatar = findViewById(R.id.imgServiceAvatar);
+        imgDoctorAvatar = findViewById(R.id.imgDoctorAvatar);
         txtServiceName = findViewById(R.id.txtServiceName);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -110,6 +111,7 @@ public class BookingpageInfoActivity extends AppCompatActivity {
                     BaseResponse2<Booking> bookingResponse = response.body();
                     if (bookingResponse != null && bookingResponse.getResult() == 1) {
                         bindData(bookingResponse.getData());
+
                     } else {
                         String errorMessage = bookingResponse != null ? bookingResponse.getMsg() : "Unknown error";
                         DialogUtils.showErrorDialog(BookingpageInfoActivity.this, errorMessage);
@@ -146,6 +148,10 @@ public class BookingpageInfoActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     BaseResponse<BookingImage> bookingResponse = response.body();
                     if (bookingResponse != null && bookingResponse.getResult() == 1) {
+                        for(BookingImage item : bookingResponse.getData()){
+                            String uploadUrl  = BASE_URL + item.getUrl();
+                            item.setUrl(uploadUrl);
+                        }
                         bindBookingImageData(bookingResponse.getData());
                     } else {
                         String errorMessage = bookingResponse != null ? bookingResponse.getMsg() : "Unknown error";
@@ -181,6 +187,8 @@ public class BookingpageInfoActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse3> call, Response<BaseResponse3> response) {
                 if (response.isSuccessful()) {
                     BaseResponse3 baseResponse3 = response.body();
+                    fetchBooking();
+                    fetchBookingImage();
                     DialogUtils.showErrorDialog(BookingpageInfoActivity.this, baseResponse3.getMsg());
                 } else {
                     DialogUtils.showErrorDialog(BookingpageInfoActivity.this, "Failed to fetch booking information.");
@@ -206,11 +214,15 @@ public class BookingpageInfoActivity extends AppCompatActivity {
         txtPatientGender.setText(booking.getGender() == 0 ? "Nam" : "Nữ");
         txtPatientReason.setText(booking.getReason());
         txtBookingStatus.setText(booking.getStatus());
+        txtServiceName.setText(booking.getService().getName());
 
         String status = booking.getStatus();
         bookingStatus = status;
+        Log.d("bookingStatus",bookingStatus);
         if(bookingStatus.equals("PROCESSING")){
             btnCancel.setVisibility(View.VISIBLE);
+        } else {
+            btnCancel.setVisibility(View.GONE);
         }
 
 
@@ -233,4 +245,11 @@ public class BookingpageInfoActivity extends AppCompatActivity {
             }
         }));
     }
+
+//    private void printServiceInformation(Booking service)
+//    {
+//        ser
+//        String name = service.getName();
+//        txtServiceName.setText(name);
+//    }
 }

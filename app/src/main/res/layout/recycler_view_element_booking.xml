@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/elementServiceImage"
-            android:src="@drawable/default_speciality"
+            android:src="@drawable/img_dauxuongkhop"
             android:layout_width="100dp"
             android:layout_height="50dp"/>
 

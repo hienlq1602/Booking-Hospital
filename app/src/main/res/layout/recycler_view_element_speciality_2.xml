@@ -16,7 +16,7 @@
             android:id="@+id/elementImage"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:src="@drawable/default_speciality"
+            android:src="@drawable/img_dauxuongkhop"
             android:contentDescription="@string/image" />
 
         <TextView

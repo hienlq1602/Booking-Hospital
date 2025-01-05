@@ -1,9 +1,12 @@
 package com.ndm.ptit.fragment;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,9 +28,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import com.ndm.ptit.R;
+import com.ndm.ptit.activity.ServicepageActivity;
+import com.ndm.ptit.api.ApiService;
+import com.ndm.ptit.api.RetrofitClient;
+import com.ndm.ptit.dialogs.DialogUtils;
 import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.login.LoginRespone;
+import com.ndm.ptit.enitities.services.DoctorService;
+import com.ndm.ptit.enitities.services.DoctorServiceResponse;
 import com.ndm.ptit.enitities.services.Services;
+import com.ndm.ptit.enitities.services.ServicesResponse;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.LoadingScreen;
 import com.ndm.ptit.helper.Tooltip;
@@ -39,6 +49,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -47,22 +58,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * @since 09-12-2022
- * flow: Fragment 1 -> Fragment 3 -> Fragment 2
- */
+
 public class  BookingFragment1 extends Fragment {
 
     private final String TAG = "BookingFragment1";
 
     private String serviceId;// nếu serviceId == null thì nó sẽ bằng 1 bởi vì API cần serviceId do rằng buộc dữ liệu trong database
     private String doctorId;// doctorId == null thì nó sẽ bằng 0, vì chúng ta không cần
+    private String doctorName;// doctorId == null thì nó sẽ bằng 0, vì chúng ta không cần
+    private String doctorNameShow;// doctorId == null thì nó sẽ bằng 0, vì chúng ta không cần
+    private String doctorAvatar;// doctorId == null thì nó sẽ bằng 0, vì chúng ta không cần
     private LoadingScreen loadingScreen;
 
     private Dialog dialog;
 
-    private ImageView imgServiceAvatar;
+    private ImageView imgDoctorAvatar;
     private TextView txtServiceName;
+    private TextView txtDoctorName;
 
     private Activity activity;
     private Context context;
@@ -80,6 +92,7 @@ public class  BookingFragment1 extends Fragment {
     private EditText txtPatientReason;
     private EditText txtAppointmentDate;
     private EditText txtAppointmentTime;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,10 +106,7 @@ public class  BookingFragment1 extends Fragment {
         return view;
     }
 
-    /**
-     * @since 23-11-2022
-     * setup component()
-     */
+
     private void setupComponent(View view)
     {
 
@@ -112,15 +122,21 @@ public class  BookingFragment1 extends Fragment {
         assert bundle != null;
         serviceId = bundle.getString("serviceId") != null ? bundle.getString("serviceId") : Utils.service;
         doctorId = bundle.getString("doctorId") != null ? bundle.getString("doctorId") : "0";
+        doctorName = bundle.getString("doctorName") != null ? bundle.getString("doctorName") : "0";
+        doctorNameShow = "Bác sĩ " + doctorName;
+        doctorAvatar = bundle.getString("doctorAvatar") != null ? bundle.getString("doctorAvatar") : "0";
 
+        Log.d("ServiceId",serviceId);
         System.out.println(TAG);
         System.out.println("serviceId: " + serviceId);
         System.out.println("doctorId: " + doctorId);
 
         /*FORM*/
-        imgServiceAvatar = view.findViewById(R.id.imgServiceAvatar);
+        imgDoctorAvatar = view.findViewById(R.id.imgDoctorAvatar);
         txtServiceName = view.findViewById(R.id.txtServiceName);
         btnConfirm = view.findViewById(R.id.btnConfirm);
+        txtDoctorName = view.findViewById(R.id.txtDoctorName);
+
 
         txtBookingName = view.findViewById(R.id.txtBookingName);
         txtBookingPhone = view.findViewById(R.id.txtBookingPhone);
@@ -136,45 +152,27 @@ public class  BookingFragment1 extends Fragment {
         txtAppointmentTime = view.findViewById(R.id.txtAppointmentTime);
 
         /*SET UP FORM*/
+        txtBookingName.setText(user.getData().getName());
+        txtPatientName.setText(user.getData().getName());
         txtBookingPhone.setText(user.getData().getPhone());
         txtPatientBirthday.setText(user.getData().getBirthday());
         txtPatientAddress.setText(user.getData().getAddress());
-        txtAppointmentDate.setText(Tooltip.getToday());
+        txtAppointmentDate.setText(Utils.bookingTime);
         txtAppointmentTime.setText(R.string.default_appointment_time);
+        txtDoctorName.setText(doctorNameShow);
+        if(doctorAvatar.length()>0){
+            Picasso.get().load(BASE_URL+doctorAvatar).into(imgDoctorAvatar);
+        }
+        fetchSpecialityResponse();
     }
 
 
     private void printServiceInformation(Services service)
     {
         String name = service.getName();
-        String image = service.getImage();
-
         txtServiceName.setText(name);
-        if( service.getImage().length() > 0)
-        {
-            Picasso.get().load(image).into(imgServiceAvatar);
-        }
     }
 
-    private void printDoctorInformation(Doctor doctor)
-    {
-        String name = getString(R.string.create_booking)
-                + " " + getString(R.string.with)
-                + " " + getString(R.string.doctor)
-                + " " + doctor.getName();
-        String image = doctor.getAvatar();
-
-        txtServiceName.setText(name);
-        if( doctor.getAvatar().length() > 0)
-        {
-            Picasso.get().load(image).into(imgServiceAvatar);
-        }
-    }
-
-    /**
-     * @since 23-11-2022
-     * setup event
-     */
     private void setupEvent(View view)
     {
         /*-************************PREPARE TIME & DATE PICKER FOR BUTTON**************************************/
@@ -317,6 +315,51 @@ public class  BookingFragment1 extends Fragment {
         }
         return true;
     }
+    private void fetchSpecialityResponse() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+//        String date = txtDate.getText().toString().trim();
+
+        if (token == null) {
+            DialogUtils.showErrorDialog(getContext(), "Token không tồn tại. Vui lòng đăng nhập lại.");
+            return;
+        }
+
+        // Kiểm tra serviceId
+        if (serviceId == null || serviceId.isEmpty()) {
+            DialogUtils.showErrorDialog(getContext(), "Không tìm thấy ID dịch vụ.");
+            return;
+        }
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<ServicesResponse> call = apiService.getServiceById("Bearer " + token, Integer.parseInt(serviceId));
+
+        call.enqueue(new Callback<ServicesResponse>() {
+            @Override
+            public void onResponse(Call<ServicesResponse> call, Response<ServicesResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ServicesResponse specialityResponse = response.body();
+                    if (specialityResponse.getResult() == 1) {
+                        Services servicesRespons = specialityResponse.getData();
+                        Log.d("servicesRespons",servicesRespons.toString());
+                        printServiceInformation(servicesRespons);
+                    } else {
+                        DialogUtils.showErrorDialog(getContext(), specialityResponse.getMsg());
+                    }
+                } else {
+                    DialogUtils.showErrorDialog(getContext(), "Không thể tải thông tin dịch vụ.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServicesResponse> call, Throwable t) {
+                Log.d("getMessage",t.getMessage());
+                DialogUtils.showErrorDialog(getContext(), "Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
+
 
 
 }

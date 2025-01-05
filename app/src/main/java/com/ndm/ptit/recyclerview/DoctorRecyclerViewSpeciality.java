@@ -1,5 +1,7 @@
 package com.ndm.ptit.recyclerview;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -52,7 +54,7 @@ public class DoctorRecyclerViewSpeciality extends RecyclerView.Adapter<DoctorRec
         String name = context.getString(R.string.doctor) + " " + element.getName();
 
         if (element.getAvatar() != null && !element.getAvatar().isEmpty()) {
-            Picasso.get().load(element.getAvatar()).placeholder(R.drawable.default_avatar).into(holder.image);
+            Picasso.get().load(BASE_URL+element.getAvatar()).placeholder(R.drawable.default_avatar).into(holder.image);
         } else {
             holder.image.setImageResource(R.drawable.default_avatar);
         }

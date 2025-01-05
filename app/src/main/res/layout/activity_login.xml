@@ -83,7 +83,7 @@
                 android:layout_weight="1"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:text="0399703005"
+                android:text="0835900084"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
 
@@ -94,25 +94,40 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:text="Mật khẩu"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="12sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:text="Mật khẩu"-->
+<!--                android:textColor="@color/colorTextBlack"-->
+<!--                android:textSize="12sp" />-->
 
+<!--            <EditText-->
+<!--                android:id="@+id/txtPassWord"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:hint="@string/phone_number"-->
+<!--                android:inputType="phone"-->
+<!--                android:text="12345"-->
+<!--                android:textColor="@color/colorTextBlack"-->
+<!--                android:textSize="12sp" />-->
             <EditText
                 android:id="@+id/txtPassWord"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_weight="1"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:text="12345"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="12sp" />
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:autofillHints=""
+                android:background="@drawable/input_style"
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="20dp"
+                android:hint="@string/verification_code"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="20dp"
+                android:text="123456"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
         </LinearLayout><!-- end INPUT PHONE NUMBER -->
 

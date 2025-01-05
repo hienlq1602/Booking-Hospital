@@ -6,15 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
-    tools:context=".Settingspage.SettingsFragment">
+    android:background="@color/colorBackground">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatar"
-        android:src="@drawable/default_avatar"
-        android:layout_gravity="center"
         android:layout_width="80dp"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/default_avatar" />
 
     <TextView
         android:paddingVertical="10dp"

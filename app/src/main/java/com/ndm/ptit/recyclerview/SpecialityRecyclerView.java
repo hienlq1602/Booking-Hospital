@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,11 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.do_an_tot_nghiep.Specialitypage.SpecialitypageActivity;
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.SpecialitypageActivity;
-import com.ndm.ptit.enitities.Speciality;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -68,7 +64,7 @@ public class SpecialityRecyclerView extends RecyclerView.Adapter<SpecialityRecyc
         int id = element.getId();
         String name = element.getName();
         String image = element.getImage().length() > 0 ?
-                uploadUri + element.getImage() : context.getString(R.drawable.default_speciality);
+                uploadUri + element.getImage() : context.getString(R.drawable.img_dauxuongkhop);
 
 
         if( element.getImage().length() > 0)

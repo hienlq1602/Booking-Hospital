@@ -1,5 +1,7 @@
 package com.ndm.ptit.activity;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -135,7 +137,7 @@ public class RecordpageActivity extends AppCompatActivity {
 
         // Tải hình ảnh bác sĩ
         Glide.with(this)
-                .load("URL_IMAGE" + record.getDoctorName())
+                .load(BASE_URL + record.getDoctorName())
                 .placeholder(R.drawable.ic_person_round)
                 .into(imgDoctorAvatar);
     }

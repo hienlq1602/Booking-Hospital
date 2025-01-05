@@ -1,5 +1,7 @@
 package com.ndm.ptit.activity;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +34,7 @@ public class DoctorpageActivity extends AppCompatActivity {
 
     private String doctorId;
     private String speciality;
+    private String doctorAvatar;
     private CircleImageView imgAvatar;
     private TextView txtName;
     private TextView txtSpeciality;
@@ -43,6 +46,7 @@ public class DoctorpageActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private AppCompatButton btnCreateBooking;
     private SharedPreferences sharedPreferences;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,9 @@ public class DoctorpageActivity extends AppCompatActivity {
         btnCreateBooking.setOnClickListener(view -> {
             Intent intent = new Intent(this, BookingpageActivity.class);
             intent.putExtra("doctorId", doctorId);
+            intent.putExtra("doctorName", txtName.getText().toString().trim());
+            intent.putExtra("doctorAvatar", doctorAvatar);
+
             startActivity(intent);
         });
     }
@@ -96,14 +103,15 @@ public class DoctorpageActivity extends AppCompatActivity {
                     if (doctorResponse != null && doctorResponse.getResult() == 1) {
                         DoctorResponse doctor = doctorResponse.getData();
                         txtName.setText(doctor.getName());
+//                        intent.putExtra("doctorId", doctor.getId());
                         txtPhoneNumber.setText(doctor.getPhone());
                         txtSpeciality.setText(doctor.getSpecialityName());
                         wvwDescription.loadData(doctor.getDescription(), "text/html", "UTF-8");
-
+                        doctorAvatar=doctor.getAvatar();
 
                         if (!doctor.getAvatar().isEmpty()) {
                             Glide.with(DoctorpageActivity.this)
-                                    .load(doctor.getAvatar())
+                                    .load(BASE_URL+doctor.getAvatar())
                                     .into(imgAvatar);
                         }
                     } else {

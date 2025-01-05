@@ -228,10 +228,14 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
         txtPatientPhone.setText(detail.getPatientPhone());
         txtAppointmentDate.setText(detail.getDate());
         txtAppointmentTime.setText(detail.getAppointmentTime());
-        myPosition2 = detail.getPosition();
+//        txtNumericalOrder.setText(detail.getNumericalOrder());
 
+        myPosition2 = detail.getPosition();
+        Log.d("position", String.valueOf(myPosition));
+//        txtPosition.setText(myPosition2);
         switch (detail.getStatus()) {
             case "PROCESSING":
+                txtStatusProcessing.setText("Đang chờ ");
                 txtStatusProcessing.setVisibility(View.VISIBLE);
                 txtStatusDone.setVisibility(View.GONE);
                 txtStatusCancel.setVisibility(View.GONE);
@@ -239,6 +243,23 @@ public class AppointmentpageInfoActivity extends AppCompatActivity {
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 appointmentQueueRecyclerView.setVisibility(View.VISIBLE);
                 appointmentQueueTitle.setVisibility(View.VISIBLE);
+                btnWatchMedicalTreatment.setVisibility(View.GONE);
+                btnWatchMedicalRecord.setVisibility(View.GONE);
+
+                break;
+                case "EXAMINATING":
+
+                txtStatusProcessing.setText("Đang khám");
+                txtStatusProcessing.setVisibility(View.VISIBLE);
+                txtStatusDone.setVisibility(View.GONE);
+                txtStatusCancel.setVisibility(View.GONE);
+//                appointmentStatus = true;// we show recycler view appointment queue and send GET request to server
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                appointmentQueueRecyclerView.setVisibility(View.VISIBLE);
+                appointmentQueueTitle.setVisibility(View.VISIBLE);
+                btnWatchMedicalTreatment.setVisibility(View.GONE);
+                btnWatchMedicalRecord.setVisibility(View.GONE);
+
                 break;
             case "DONE":
                 txtStatusProcessing.setVisibility(View.GONE);

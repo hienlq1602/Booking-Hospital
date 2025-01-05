@@ -31,8 +31,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -46,7 +44,7 @@ public interface ApiService {
     @POST("api/login")
     Call<LoginRespone> login(@Body LoginRequest loginRequest);
 
-    @POST("api/login")
+    @POST("api/signup")
     Call<SignUpResponse> signup(@Body SignUpRequest signUpRequest);
 
     @GET("api/specialities")
@@ -74,7 +72,7 @@ public interface ApiService {
     );
 
     @GET("api/treatments/{id}")
-    Call<BaseResponse2<Treatment>> getTreatmentByID(
+    Call<BaseResponse<Treatment>> getTreatmentByID(
             @Header("Authorization") String token,
             @Path("id") int id
     );
@@ -116,13 +114,13 @@ public interface ApiService {
     @GET("api/services/{id}")
     Call<ServicesResponse> getServiceById(
             @Header("Authorization") String token,
-            @Path("id") int id
-    );
+            @Path("id") int id);
 
     @GET("api/doctors/service/{id}")
     Call<DoctorServiceResponse> getDoctorServiceById(
             @Header("Authorization") String token,
-            @Path("id") int id
+            @Path("id") int id,
+            @Query("date") String date
     );
 
     @GET("api/doctors/{id}")

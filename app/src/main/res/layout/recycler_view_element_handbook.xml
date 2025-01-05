@@ -16,7 +16,7 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:background="@drawable/background_handbook_image"
-        android:src="@drawable/default_speciality" />
+        android:src="@drawable/img_dauxuongkhop" />
 
     <TextView
         android:id="@+id/elementName"

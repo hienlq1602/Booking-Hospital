@@ -17,9 +17,13 @@ import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
 import com.ndm.ptit.dialogs.DialogUtils;
+import com.ndm.ptit.enitities.BaseResponse2;
 import com.ndm.ptit.enitities.Speciality;
+import com.ndm.ptit.enitities.doctor.DoctorResponse;
 import com.ndm.ptit.enitities.services.DoctorService;
 import com.ndm.ptit.enitities.services.DoctorServiceResponse;
+import com.ndm.ptit.enitities.services.Services;
+import com.ndm.ptit.enitities.services.ServicesResponse;
 import com.ndm.ptit.enitities.speciality.SpecialityResponse;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.GlobalVariable;
@@ -98,6 +102,52 @@ public class SpecialitypageActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view->finish());
     }
 
+    private void fetchSpecialityResponse() {
+        SharedPreferences prefs = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+//        String date = txtDate.getText().toString().trim();
+
+        if (token == null) {
+            DialogUtils.showErrorDialog(this, "Token không tồn tại. Vui lòng đăng nhập lại.");
+            return;
+        }
+
+        // Kiểm tra serviceId
+        if (specialityId == null || specialityId.isEmpty()) {
+            DialogUtils.showErrorDialog(this, "Không tìm thấy ID dịch vụ.");
+            return;
+        }
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<BaseResponse2<SpecialityResponse>> call = apiService.getSpecialityByID("Bearer " + token, Integer.parseInt(specialityId));
+
+        call.enqueue(new Callback<BaseResponse2<SpecialityResponse>>() {
+            @Override
+            public void onResponse(Call<BaseResponse2<SpecialityResponse>> call, Response<BaseResponse2<SpecialityResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    BaseResponse2<SpecialityResponse> specialityResponse = response.body();
+//                    printSpecialityInformation(specialityResponse);
+                    if (specialityResponse != null && specialityResponse.getResult() == 1) {
+                        SpecialityResponse speciality = specialityResponse.getData();
+//                        Log.d("servicesRespons",servicesRespons.toString());
+                        printSpecialityInformation(speciality);
+                    } else {
+                        DialogUtils.showErrorDialog(SpecialitypageActivity.this, specialityResponse.getMsg());
+                    }
+                } else {
+                    DialogUtils.showErrorDialog(SpecialitypageActivity.this, "Không thể tải thông tin dịch vụ.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse2<SpecialityResponse>> call, Throwable t) {
+                Log.d("getMessage",t.getMessage());
+                DialogUtils.showErrorDialog(SpecialitypageActivity.this, "Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
+
     private void fetchDoctorServiceResponse() {
         SharedPreferences prefs = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
@@ -163,7 +213,7 @@ public class SpecialitypageActivity extends AppCompatActivity {
         String image = speciality.getImage();
 
         txtName.setText(name);
-        Picasso.get().load(image).into(imgAvatar);
+//        Picasso.get().load(image).into(imgAvatar);
         wvwDescription.loadDataWithBaseURL(null, description, "text/HTML", "UTF-8", null);
     }
 }

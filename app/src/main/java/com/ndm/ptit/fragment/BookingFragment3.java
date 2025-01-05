@@ -224,9 +224,9 @@ public class BookingFragment3 extends Fragment {
                             }
                         } else {
                             // Handle server error or validation error
-                            String errorMessage = "An error occurred.";
+                            String errorMessage = "Thời gian bị trùng";
                             if (response.body() != null && response.body().getMsg() != null) {
-                                errorMessage = response.body().getMsg(); // Get error message from server response
+                                 errorMessage = response.body().getMsg(); // Get error message from server response
                             }
                             DialogUtils.showErrorDialog(getContext(), errorMessage);
                         }

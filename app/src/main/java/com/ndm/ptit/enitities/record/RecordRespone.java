@@ -1,13 +1,20 @@
 package com.ndm.ptit.enitities.record;
 
+import com.google.gson.annotations.SerializedName;
 import com.ndm.ptit.enitities.Room;
 
 public class RecordRespone {
+    @SerializedName("id")
     private int id;
+    @SerializedName("appointment_id")
     private int appointmentId;
+    @SerializedName("reason")
     private String reason;
+    @SerializedName("description")
     private String description;
+    @SerializedName("status_before")
     private String statusBefore;
+    @SerializedName("status_after")
     private String statusAfter;
     private String createdAt;
     private String updatedAt;

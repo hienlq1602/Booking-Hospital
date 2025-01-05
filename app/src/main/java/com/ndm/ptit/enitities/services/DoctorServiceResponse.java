@@ -8,6 +8,7 @@ public class DoctorServiceResponse {
     private int  quantity;
     private List<DoctorService> data;
 
+
     public DoctorServiceResponse() {
     }
 

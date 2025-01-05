@@ -73,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 SignUpRequest request = new SignUpRequest();
                 request.setEmail("user@gmail.com");
+                request.setType("patient");
                 request.setPhone(phone);
                 request.setPassword(password);
                 request.setPasswordConfirm(confirmPassword);
@@ -98,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                             patient.setPhone(signUpResponse.getData().getPhone());
                             Utils.user.setData(patient);
                             if (signUpResponse.getResult() == 1) {
-                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(SignUpActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();

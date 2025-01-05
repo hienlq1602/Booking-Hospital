@@ -83,6 +83,7 @@ public class LogInActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
                 progressDialog.dismiss();
+                Log.d("Login",response.toString());
                 if (response.isSuccessful()) {
                     LoginRespone loginRespone = response.body();
                     if (loginRespone != null && loginRespone.getResult() == 1) {

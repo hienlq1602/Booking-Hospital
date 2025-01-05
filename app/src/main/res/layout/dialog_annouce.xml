@@ -23,7 +23,7 @@
             android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
             android:id="@+id/alertTitle"
-            android:text="@string/success"
+            android:text="Thành công"
             android:textAlignment="center"
             android:textColor="@color/colorTextDialog"
             android:textSize="25sp"
@@ -35,7 +35,7 @@
             android:layout_height="70dp"
             android:layout_margin="16dp"
             android:gravity="center_horizontal"
-            android:text="@string/add_account_info_successfully"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorTextBlack"
             android:textSize="11sp" />

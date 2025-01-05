@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:contentDescription="@string/image"
-                android:src="@drawable/default_speciality" /><!-- end IMAGE -->
+                android:src="@drawable/img_dauxuongkhop" /><!-- end IMAGE -->
 
             <!-- NAME -->
             <LinearLayout
@@ -126,7 +126,21 @@
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout><!-- end DESCRIPTION -->
 
-
+            <EditText
+                android:id="@+id/txtDate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/input_style_booking"
+                android:drawableStart="@drawable/ic_patient_birthday"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:inputType="text"
+                android:hint="Chon ngay"
+                android:importantForAutofill="no"
+                android:paddingHorizontal="10dp"
+                android:textSize="11sp" />
+            <!-- end BIRTHDAY -->
             <!-- BUTTON CREATE BOOKING -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCreateBooking"

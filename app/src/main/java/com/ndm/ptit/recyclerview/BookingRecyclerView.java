@@ -51,14 +51,42 @@ public class BookingRecyclerView extends RecyclerView.Adapter<BookingRecyclerVie
         String id = String.valueOf(element.getId());
 
         String serviceName = element.getService().getName();
+        int serviceID = element.getService().getId();
         holder.serviceName.setText(serviceName);
-
-
-        if(element.getService().getAvatar() != null)
-        {
-            String serviceImage = element.getService().getAvatar();
-            Picasso.get().load(serviceImage).into(holder.serviceImage);
+        ImageView serviceImage = holder.serviceImage;
+        switch (serviceID){
+            case 1:
+                serviceImage.setImageResource(R.drawable.img_niengrang);
+                break;
+            case 2 :
+                serviceImage.setImageResource(R.drawable.img_khamxoang);
+                break;
+            case 3 :
+                serviceImage.setImageResource(R.drawable.img_diennaodo);
+                break;
+            case 4 :
+                serviceImage.setImageResource(R.drawable.img_sankhoa);
+                break;
+            case 5 :
+                serviceImage.setImageResource(R.drawable.img_khamrang);
+                break;
+            case 6 :
+                serviceImage.setImageResource(R.drawable.img_khammat);
+                break;
+            case 7 :
+                serviceImage.setImageResource(R.drawable.img_daychang);
+                break;
+            default:
+                serviceImage.setImageResource(R.drawable.img_dauxuongkhop);
+                break;
         }
+
+//        if(element.getService().getAvatar() != null)
+//        {
+//            String serviceImage = element.getService().getAvatar();
+//            Picasso.get().load(serviceImage).into(holder.serviceImage);
+//        }
+
 
         String datetime = element.getAppointmentTime();
         holder.datetime.setText(datetime);
@@ -144,5 +172,6 @@ public class BookingRecyclerView extends RecyclerView.Adapter<BookingRecyclerVie
             statusDone = itemView.findViewById(R.id.elementStatusDone);
             statusProcessing = itemView.findViewById(R.id.elementStatusProcessing);
         }
+
     }
 }

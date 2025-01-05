@@ -18,10 +18,37 @@ public class DoctorService {
     private int roomId;
     private String recoveryToken;
 
+
+    private String  available_status;
+    private int appointment_number;
+
+    @Override
+    public String toString() {
+        return "DoctorService{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", role='" + role + '\'' +
+                ", active=" + active +
+                ", avatar='" + avatar + '\'' +
+                ", create_At='" + create_At + '\'' +
+                ", update_At='" + update_At + '\'' +
+                ", speciality=" + speciality +
+                ", roomId=" + roomId +
+                ", recoveryToken='" + recoveryToken + '\'' +
+                ", available_status='" + available_status + '\'' +
+                ", appointment_number=" + appointment_number +
+                '}';
+    }
+
     public DoctorService() {
     }
 
-    public DoctorService(int id, String email, String phone, String name, String description, double price, String role, int active, String avatar, String createAt, String updateAt, SpecialityResponse speciality, int roomId, String recoveryToken) {
+    public DoctorService(int id, String email, String phone, String name, String description, double price, String role, int active, String avatar, String createAt, String updateAt, SpecialityResponse speciality, int roomId, String recoveryToken,
+                         String  available_status,int appointment_number ){
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -36,6 +63,9 @@ public class DoctorService {
         this.speciality = speciality;
         this.roomId = roomId;
         this.recoveryToken = recoveryToken;
+        this.appointment_number = appointment_number;
+        this.available_status = available_status;
+
     }
 
     public int getId() {
@@ -108,6 +138,50 @@ public class DoctorService {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getAvailable_status() {
+        return available_status;
+    }
+
+    public void setAvailable_status(String available_status) {
+        this.available_status = available_status;
+    }
+
+    public int getAppointment_number() {
+        return appointment_number;
+    }
+
+    public void setAppointment_number(int appointment_number) {
+        this.appointment_number = appointment_number;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public String getUpdate_At() {
+        return update_At;
+    }
+
+    public void setUpdate_At(String update_At) {
+        this.update_At = update_At;
+    }
+
+    public String getCreate_At() {
+        return create_At;
+    }
+
+    public void setCreate_At(String create_At) {
+        this.create_At = create_At;
+    }
+
+    public SpecialityResponse getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(SpecialityResponse speciality) {
+        this.speciality = speciality;
     }
 
     public String getCreateAt() {

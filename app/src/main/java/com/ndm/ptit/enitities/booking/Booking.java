@@ -1,5 +1,7 @@
 package com.ndm.ptit.enitities.booking;
 
+import com.ndm.ptit.enitities.Doctor;
+
 import java.util.Date;
 
 public class Booking {

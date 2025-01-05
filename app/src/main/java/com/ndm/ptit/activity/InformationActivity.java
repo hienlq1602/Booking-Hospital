@@ -1,8 +1,13 @@
 package com.ndm.ptit.activity;
 
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+import static com.ndm.ptit.utils.Utils.user;
+import static java.security.AccessController.getContext;
+
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,17 +32,23 @@ import androidx.core.content.ContextCompat;
 import com.ndm.ptit.R;
 import com.ndm.ptit.api.ApiService;
 import com.ndm.ptit.api.RetrofitClient;
+import com.ndm.ptit.dialogs.DialogUtils;
+import com.ndm.ptit.enitities.BaseResponse;
 import com.ndm.ptit.enitities.BaseResponse2;
 
 import com.ndm.ptit.enitities.booking.BookingImage;
 import com.ndm.ptit.enitities.login.Patient;
+import com.ndm.ptit.enitities.speciality.SpecialityResponse;
+import com.ndm.ptit.fragment.SettingsFragment;
 import com.ndm.ptit.helper.Dialog;
 import com.ndm.ptit.helper.LoadingScreen;
 
+import com.ndm.ptit.helper.Tooltip;
 import com.ndm.ptit.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -113,9 +125,17 @@ public class InformationActivity extends AppCompatActivity {
         dialog = new Dialog(this);
         loadingScreen = new LoadingScreen(this);
     }
-
+    Intent intent;
     private void initListen(){
         btnSave.setOnClickListener(v -> updateInformation());
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInformation();
+                intent = new Intent(InformationActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         btnUploadAvatar.setOnClickListener(v ->
              uploadAvatar(uriAvatar)
         );
@@ -137,7 +157,7 @@ public class InformationActivity extends AppCompatActivity {
     private void showInfo(Patient user)
     {
 
-        String avatar = user.getAvatar();
+        String avatar = BASE_URL+user.getAvatar();
         String id = String.valueOf(user.getId());
 
         String email = user.getEmail();
@@ -158,9 +178,40 @@ public class InformationActivity extends AppCompatActivity {
         }
         txtHealthInsuranceNumber.setText(id);
         txtEmail.setText(email);
-
         txtName.setText(name);
         txtPhone.setText(phone);
+        if(birthday == "Unknow"){
+            txtBirthday.setText(Tooltip.getToday());
+        }else{
+            txtBirthday.setText(birthday);
+            txtBirthday.setOnClickListener(v -> {
+                // Lấy ngày hiện tại để thiết lập mặc định cho DatePickerDialog
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH)+1;
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+//            String defaultDate = String.format("%04d-%02d-%02d", year, month, day);
+//            txtDate.setText(defaultDate); // Hiển thị ngày mặc định
+//            fetchDoctorServiceResponse();
+
+                // Tạo DatePickerDialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        this,
+                        (view, selectedYear, selectedMonth, selectedDay) -> {
+                            // Khi người dùng chọn ngày xo
+                            String selectedDate = String.format("%04d-%02d-%02d",selectedYear,(selectedMonth)+1, selectedDay);
+                            txtBirthday.setText(selectedDate); // Hiển thị ngày trong EditText
+                            Log.d("vao day","abc");
+                        },
+                        year, month, day
+                );
+
+                datePickerDialog.show();
+            });
+        }
+
+
 
 
         if(gender == 1)
@@ -171,7 +222,53 @@ public class InformationActivity extends AppCompatActivity {
         {
             rgGender.check(R.id.rdFemale);
         }
-        txtBirthday.setText(birthday);
+
+//        else {
+//
+//            Calendar calendar = Calendar.getInstance();
+//            int year = calendar.get(Calendar.YEAR);
+//            int month = calendar.get(Calendar.MONTH);
+//            int day = calendar.get(Calendar.DAY_OF_MONTH);
+//
+//            /*DATE PICKER FOR BIRTHDAY - if day or month less than 10, we will insert 0 in front of the value*/
+//            DatePickerDialog.OnDateSetListener dateOfBirth = (view13, year1, month1, day1) -> {
+//                calendar.set(Calendar.YEAR, year1);
+//                calendar.set(Calendar.MONTH, month1);
+//                calendar.set(Calendar.DAY_OF_MONTH, day1);
+//
+//                String dayFormatted = day1 < 10 ? "0" + day1 : String.valueOf(day1);
+//                String monthFormatted = (month1 + 1) < 10 ? "0" + (month1 + 1) : String.valueOf(month1 + 1);
+//
+//                String output = year1 + "-" + monthFormatted + "-" + dayFormatted;
+//                txtBirthday.setText(output);
+//            };
+//
+//        }
+//        txtBirthday.setOnClickListener(v -> {
+//            // Lấy ngày hiện tại để thiết lập mặc định cho DatePickerDialog
+//            Calendar calendar = Calendar.getInstance();
+//            int year = calendar.get(Calendar.YEAR);
+//            int month = calendar.get(Calendar.MONTH)+1;
+//            int day = calendar.get(Calendar.DAY_OF_MONTH);
+//
+////            String defaultDate = String.format("%04d-%02d-%02d", year, month, day);
+////            txtDate.setText(defaultDate); // Hiển thị ngày mặc định
+////            fetchDoctorServiceResponse();
+//
+//            // Tạo DatePickerDialog
+//            DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                    this,
+//                    (view, selectedYear, selectedMonth, selectedDay) -> {
+//                        // Khi người dùng chọn ngày xo
+//                        String selectedDate = String.format("%04d-%02d-%02d",selectedYear,(selectedMonth)+1, selectedDay);
+//                        txtBirthday.setText(selectedDate); // Hiển thị ngày trong EditText
+//                        Log.d("vao day","abc");
+//                    },
+//                    year, month, day
+//            );
+//
+//            datePickerDialog.show();
+//        });
         txtAddress.setText(address);
         txtCreateAt.setText(createAt);
         txtUpdateAt.setText(updateAt);
@@ -189,6 +286,7 @@ public class InformationActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse2<Patient>> call, Response<BaseResponse2<Patient>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Patient patient = response.body().getData();
+                    Utils.user.setData(patient);
                     showInfo(patient);
                 } else {
                     Toast.makeText(InformationActivity.this, "Failed to load personal information", Toast.LENGTH_SHORT).show();
@@ -224,8 +322,10 @@ public class InformationActivity extends AppCompatActivity {
         apiService.uploadAvatar(body, "Bearer " + token, Integer.parseInt(String.valueOf(Utils.user.getData().getId()))).enqueue(new Callback<BaseResponse2<String>>() {
             @Override
             public void onResponse(Call<BaseResponse2<String>> call, Response<BaseResponse2<String>> response) {
+//                BaseResponse2<String> patientUlAva = response.body();
                 if (response.isSuccessful()) {
                     Toast.makeText(InformationActivity.this, "Avatar updated successfully", Toast.LENGTH_SHORT).show();
+//                    DialogUtils.showSucccessDialog(getContext(), patientUlAva.getMsg());
                     showInfo2();
                 } else {
                     Log.d("response",response.toString());
@@ -248,6 +348,7 @@ public class InformationActivity extends AppCompatActivity {
         String phone = txtPhone.getText().toString().trim();
         String address = txtAddress.getText().toString().trim();
         String birthday = txtBirthday.getText().toString().trim();
+        Log.d("birthday",birthday);
 
         // Kiểm tra nếu có trường nào để trống (có thể thêm validation nếu cần)
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || birthday.isEmpty()) {
@@ -278,6 +379,15 @@ public class InformationActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse2<Patient>> call, Response<BaseResponse2<Patient>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(InformationActivity.this, "Information updated successfully", Toast.LENGTH_SHORT).show();
+//                    DialogUtils.showSucccessDialog(this,"Information updated successfully");
+                    Patient a =  Utils.user.getData();
+                    a.setName(name);
+                    a.setEmail(email);
+                    a.setPhone(phone);
+                    a.setAddress(address);
+                    a.setBirthday(birthday);
+                    a.setGender(Integer.parseInt(gender));
+                    Utils.user.setData(a);
                     showInfo2();
                 } else {
                     // Nếu có lỗi trong khi cập nhật thông tin

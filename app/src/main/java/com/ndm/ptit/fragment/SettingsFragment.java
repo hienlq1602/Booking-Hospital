@@ -1,5 +1,7 @@
 package com.ndm.ptit.fragment;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +32,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * @author Phong-Kaster
- * @since 30-11-2022
- * Settings Fragment shows all settings: language, appearance,.....
- */
+
 public class SettingsFragment extends Fragment {
 
     private RecyclerView settingRecyclerView;
@@ -62,10 +60,7 @@ public class SettingsFragment extends Fragment {
 //        showInfo();
     }
 
-    /**
-     * @since 30-11-2022
-     * setup component
-     */
+
     private void setupComponent(View view)
     {
         context = requireContext();
@@ -77,17 +72,14 @@ public class SettingsFragment extends Fragment {
         showInfo();
     }
 
-    /**
-     * @since 30-11-2022
-     * setup recycler view
-     */
+
     private void setupRecyclerView()
     {
         Setting setting0 = new Setting(R.drawable.ic_umbrella_round, "aboutUs", getString(R.string.about_us) );
         Setting setting1 = new Setting(R.drawable.ic_appointment_history, "appointmentHistory", getString(R.string.appointment_history) );
         Setting setting3 = new Setting(R.drawable.ic_reminder, "reminder", context.getString(R.string.reminder));
         Setting setting4 = new Setting(R.drawable.ic_personal_information, "information", getString(R.string.personal_information) );
-        Setting setting5 = new Setting(R.drawable.ic_appearance, "appearance", getString(R.string.appearance) );
+//        Setting setting5 = new Setting(R.drawable.ic_appearance, "appearance", getString(R.string.appearance) );
         Setting setting6 = new Setting(R.drawable.ic_email_us, "emailUs", context.getString(R.string.email_us));
 //        Setting setting7 = new Setting(R.drawable.ic_guide, "guide", context.getString(R.string.guide));
         Setting setting8 = new Setting(R.drawable.ic_exit, "exit", getString(R.string.exit) );
@@ -98,7 +90,7 @@ public class SettingsFragment extends Fragment {
         list.add(setting1);
         list.add(setting3);
         list.add(setting4);
-        list.add(setting5);
+//        list.add(setting5);
         list.add(setting6);
 //        list.add(setting7);
         list.add(setting8);
@@ -110,10 +102,7 @@ public class SettingsFragment extends Fragment {
         settingRecyclerView.setLayoutManager(manager);
     }
 
-    /**
-     * @since 02-12-2022
-     * show user information includes: AVATAR and NAME
-     */
+
     private void showInfo()
     {
         LoginRespone user = Utils.user;
@@ -122,12 +111,14 @@ public class SettingsFragment extends Fragment {
         long id = user.getData().getId();
         String heathInsuranceNumber = context.getString(R.string.health_insurance_number) + ": " + id;
         String name = user.getData().getName();
-        String avatar = user.getData().getAvatar() != null ? user.getData().getAvatar() : "";
+//        String avatar = user.getData().getAvatar() != null ? user.getData().getAvatar() : BASE_URL+"";
+        String avatar =BASE_URL + user.getData().getAvatar();
         Log.d("avatar",avatar);
 
         if(avatar != ""){
             Picasso.get().load(avatar).into(imgAvatar);
         }
+
         txtName.setText(name);
         txtHealthInsuranceNumber.setText(heathInsuranceNumber);
     }

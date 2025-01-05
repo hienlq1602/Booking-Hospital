@@ -62,42 +62,42 @@ public class ButtonRecyclerView extends RecyclerView.Adapter<ButtonRecyclerView.
             Intent intent;
             String filterKey  = context.getString(R.string.service);
             switch (id) {
-                case "specialityExamination":
+                case "niềng răng":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "1" );
                     context.startActivity(intent);
                     break;
-                case "generalExamination":
+                case "khám xoang":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "2" );
                     context.startActivity(intent);
                     break;
-                case "heartExamination":
+                case "khám điện não đồ":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "3" );
                     context.startActivity(intent);
                     break;
-                case "pregnantExamination":
+                case "khám sản khoa":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "4" );
                     context.startActivity(intent);
                     break;
-                case "toothExamination":
+                case "khám răng":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "5" );
                     context.startActivity(intent);
                     break;
-                case "eyeExamination":
+                case "khám mắt":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "6" );
                     context.startActivity(intent);
                     break;
-                case "medicalTestExamination":
+                case "chấn thương dây chằng":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "7" );
                     context.startActivity(intent);
                     break;
-                case "covid19":
+                case "đau xương khớp":
                     intent = new Intent(context, ServicepageActivity.class);
                     intent.putExtra("serviceId", "8" );
                     context.startActivity(intent);

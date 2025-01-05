@@ -1,5 +1,7 @@
 package com.ndm.ptit.enitities.booking;
 
+import static com.ndm.ptit.utils.Utils.BASE_URL;
+
 public class BookingImage {
     private int id;
     private String url;

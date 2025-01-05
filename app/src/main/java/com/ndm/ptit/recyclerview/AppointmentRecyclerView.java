@@ -2,23 +2,21 @@ package com.ndm.ptit.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ndm.ptit.R;
 import com.ndm.ptit.activity.AlarmpageActivity;
 import com.ndm.ptit.activity.AppointmentpageInfoActivity;
+import com.ndm.ptit.enitities.Doctor;
 import com.ndm.ptit.enitities.appointment.Appointment;
 import com.squareup.picasso.Picasso;
 
@@ -68,8 +66,42 @@ public class AppointmentRecyclerView extends RecyclerView.Adapter<AppointmentRec
 
         // Set status and visibility for buttons
         int avatar = R.drawable.default_avatar;
-        if(bookingid == 1){
-            avatar = R.drawable.default_speciality;
+//        if(bookingid == 1){
+//            avatar = R.drawable.img_dauxuongkhop;
+//        }
+        switch (bookingid){
+            case 1:
+//                serviceImage.setImageResource(R.drawable.img_niengrang);
+                avatar = R.drawable.img_niengrang;
+                break;
+            case 2 :
+//                serviceImage.setImageResource(R.drawable.img_khamxoang);
+                avatar = R.drawable.img_khamxoang;
+                break;
+            case 3 :
+//                serviceImage.setImageResource(R.drawable.img_diennaodo);
+                avatar = R.drawable.img_diennaodo;
+                break;
+            case 4 :
+//                serviceImage.setImageResource(R.drawable.img_sankhoa);
+                avatar = R.drawable.img_sankhoa;
+                break;
+            case 5 :
+//                serviceImage.setImageResource(R.drawable.img_khamrang);
+                avatar = R.drawable.img_khamrang;
+                break;
+            case 6 :
+//                serviceImage.setImageResource(R.drawable.img_khammat);
+                avatar = R.drawable.img_khammat;
+                break;
+            case 7 :
+//                serviceImage.setImageResource(R.drawable.img_daychang);
+                avatar = R.drawable.img_daychang;
+                break;
+            default:
+//                serviceImage.setImageResource(R.drawable.img_dauxuongkhop);
+                avatar = R.drawable.img_dauxuongkhop;
+                break;
         }
 
         Picasso.get().load(avatar).into(holder.doctorAvatar);

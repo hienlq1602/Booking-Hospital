@@ -185,14 +185,14 @@ public class MainFragment extends Fragment {
 
 
     private void setupRecyclerViewButton() {
-        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "niềng răng", "niềng răng");
-        Setting setting1 = new Setting(R.drawable.ic_exam_general, "khám xoang", "khám xoang");
-        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "khám điện não đồ", "khám điện não đồ");
-        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "khám sản khoa", "khám sản khoa");
-        Setting setting4 = new Setting(R.drawable.ic_exam_tooth, "khám răng", "khám răng");
-        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "khám mắt", "khám mắt");
-        Setting setting6 = new Setting(R.drawable.ic_exam_medical_test, "chấn thương dây chằng", "chấn thương dây chằng");
-        Setting setting7 = new Setting(R.drawable.ic_exam_covid19, "đau xương khớp", "đau xương khớp");
+        Setting setting0 = new Setting(R.drawable.ic_i_exam_speciality, "niềng răng", "Niềng răng");
+        Setting setting1 = new Setting(R.drawable.ic_exam_general, "khám xoang", "Khám xoang");
+        Setting setting2 = new Setting(R.drawable.ic_exam_heart, "khám điện não đồ", "Khám điện não đồ");
+        Setting setting3 = new Setting(R.drawable.ic_exam_pregnant, "khám sản khoa", "Khám sản khoa");
+        Setting setting4 = new Setting(R.drawable.ic_exam_tooth, "khám răng", "Khám răng");
+        Setting setting5 = new Setting(R.drawable.ic_exam_eye, "khám mắt", "Khám mắt");
+        Setting setting6 = new Setting(R.drawable.ic_exam_medical_test, "chấn thương dây chằng", "Chấn thương dây chằng");
+        Setting setting7 = new Setting(R.drawable.ic_exam_covid19, "đau xương khớp", "Đau xương khớp");
 
         List<Setting> list = new ArrayList<>();
         list.add(setting0);

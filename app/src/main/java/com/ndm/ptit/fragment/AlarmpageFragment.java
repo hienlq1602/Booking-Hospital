@@ -23,13 +23,6 @@ import com.ndm.ptit.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-/**
- * @author Phong-Kaster
- * @author 05-12-2022
- * mình cần tách thành Alarm-page Fragment vì mình muốn sử dụng lại giao diện
- * này tại Treatment Fragment
- */
 public class AlarmpageFragment extends Fragment {
 
     private final String TAG = "Alarm-page Fragment";
@@ -237,10 +230,6 @@ public class AlarmpageFragment extends Fragment {
         });/*end BUTTON CONFIRM*/
     }
 
-    /**
-     * @since 05-12-2022
-     * remove an element from array by its value
-     */
     private void removeElementFromArray(int value)
     {
         EXTRA_DAYS.removeIf(element -> element == value);

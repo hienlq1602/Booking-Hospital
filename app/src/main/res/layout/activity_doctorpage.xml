@@ -57,7 +57,7 @@
         android:layout_below="@id/title"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/umbrella_logo_3" /><!-- end AVATAR -->
+        android:src="@drawable/default_avatar" /><!-- end AVATAR -->
 
     <!-- NAME -->
     <LinearLayout
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5sp"
-            android:text="@string/default_personal_name"
+            android:text="Lê Quang Hiển"
             android:textColor="@color/colorTextBlack"
             android:textSize="12sp"
             tools:ignore="RtlSymmetry" />

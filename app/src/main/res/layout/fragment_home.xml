@@ -31,7 +31,7 @@
                 android:id="@+id/txtDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thursday, 22/12/2022"
+                android:text="Monday, 6/1/2025"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="11sp"
                 android:textStyle="bold" />
@@ -43,7 +43,7 @@
                 android:drawableStart="@drawable/ic_sunny_cloudy"
                 android:drawablePadding="10dp"
                 android:paddingVertical="5dp"
-                android:text="29 độ C"
+                android:text="24 độ C"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="11sp"
                 android:textStyle="bold" />

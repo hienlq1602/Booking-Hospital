@@ -81,13 +81,6 @@ public class AppointmentQueueRecyclerView extends RecyclerView.Adapter<Appointme
             holder.elementPatientName.setTextColor(context.getResources().getColor(R.color.colorOrange, null));
             holder.elementNPositiom.setTextColor(context.getResources().getColor(R.color.colorOrange, null));
 
-            /*tao noi dung cho Notification*/
-//            com.example.do_an_tot_nghiep.Helper.Notification notification = new com.example.do_an_tot_nghiep.Helper.Notification(context);
-//            String title = context.getString(R.string.app_name);
-//            String text = context.getString(R.string.it_is_your_turn);
-//            String bigText = patientName + " ơi! Hãy chuẩn bị, sắp tới lượt khám của bạn rồi!";
-//            notification.setup(title, text, bigText );
-//            notification.show();
         }
         if( yourPosition == myPosition && status.equals("EXAMINATING"))
         {

@@ -312,7 +312,7 @@
     <string name="read_more">Xem thêm</string>
     <string name="musculoskeletal">Cơ xương khớp</string>
     <string name="popular_doctors">Bác sĩ nổi bật</string>
-    <string name="default_doctor_name">Bác sĩ Nguyễn Thành Phong</string>
+    <string name="default_doctor_name">Bác sĩ Ahihi</string>
     <string name="default_speciality">Ngoại khoa</string>
     <string name="default_price">Giá khám: 1.896.000 VND</string>
     <string name="app_description">Chào mừng đến Umbrella Health - Ứng dụng chăm sóc sức khỏe hàng đầu Việt Nam</string>
@@ -362,7 +362,7 @@
     <string name="please_fulfill_mandatory_information">Quý khách vui lòng điền đầy đủ thông tin để tiết kiệm thời gian làm thủ tục khám</string>
     <string name="note">Lưu ý</string>
     <string name="note_1">1. Thông tin anh chị cung cấp sẽ được sử dụng làm hồ sơ khám bệnh, khi điền thông tin anh/chị vui lòng:</string>
-    <string name="note_2">\t* Ghi rõ họ và tên, viết hoa những chữ cái đầu tiên, ví dụ: <b>Nguyễn Thành Phong</b></string>
+    <string name="note_2">\t* Ghi rõ họ và tên, viết hoa những chữ cái đầu tiên, ví dụ: <b>Lê Quang Hiển</b></string>
     <string name="note_3">\t* Điền đầy đủ, đúng và vui lòng kiểm tra lại thông tin trước khi ấn Xác nhận</string>
     <string name="note_4">2. Anh/chị vui lòng tuân thủ quy định phòng chống dịch (đeo khẩu trang, khử khuẩn, khai báo dịch tễ) khi đến khám.</string>
     <string name="note_5">Bằng việc xác nhận đặt khám, bạn đã hoàn toàn đồng ý với Điều khoản sử dụng dịch vụ của chúng tôi.</string>
@@ -501,9 +501,9 @@
     <string name="sunday">Chủ nhật</string>
     <string name="vibrate">Chế độ rung</string>
     <string name="note_6">Để quy trình khám có thể diễn ra nhanh hơn, chúng tôi khuyến khích bệnh nhân cung cấp thêm bệnh án, phác đồ điều trị, toa thuốc,.. mà bệnh nhân đã từng sử dụng trước đây.</string>
-    <string name="default_booking_name">Họ tên người đặt: Nguyễn Thành Phong</string>
+    <string name="default_booking_name">Họ tên người đặt: Lê Quang Hiển</string>
     <string name="default_booking_phone">Số điện thoại người đặt: 0366.253.623</string>
-    <string name="default_patient_name">Họ tên bệnh nhân: Nguyễn Thành Phong</string>
+    <string name="default_patient_name">Họ tên bệnh nhân: Lê Quang Hiển</string>
     <string name="photo">Photo</string>
     <string name="note_7">Những tấm hình bên dưới là những ảnh bạn đã đăng lên. Để xóa những ảnh không mong muốn, hãy vuốt từ bên phải sang</string>
     <string name="booking_history">Lịch sử đặt lịch hẹn</string>

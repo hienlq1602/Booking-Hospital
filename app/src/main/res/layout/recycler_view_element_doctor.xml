@@ -60,20 +60,11 @@
                 android:id="@+id/NumberAppoimentByDate"
                 android:textColor="@color/colorTextSupport"
                 android:textSize="11sp"
-                android:text="3"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-        <!--        <TextView-->
-<!--            android:id="@+id/elementPrice"-->
-<!--            android:textColor="@color/colorTextSupport"-->
-<!--            android:textSize="11sp"-->
-<!--            android:text="@string/default_price"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
-
 
     </LinearLayout>
 

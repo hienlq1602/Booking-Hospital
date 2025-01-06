@@ -167,7 +167,7 @@
                 android:id="@+id/txtPatientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/default_personal_name"
+                android:text="Lê Quang Hiển"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" /><!-- end PATIENT NAME -->

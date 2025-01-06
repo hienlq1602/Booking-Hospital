@@ -12,7 +12,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/umbrella_logo_3" />
 
     <!-- SLOGAN -->
@@ -51,169 +51,252 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="dang ki"
+        android:layout_marginTop="10dp"
+        android:text="SIGN UP"
         android:textColor="@color/colorTextBlack"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
-    <!-- INPUT PHONE NUMBER -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/vietnam_phone_prefix"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/txtPhoneNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_weight="1"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtPhoneNumberError"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="-Chỉ nhập những số sau số 0"
+                android:textColor="@color/colorRed"
+                android:visibility="gone" />
+
+            <!-- INPUT PASSWORD -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--            <TextView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="30dp"-->
+                <!--                android:text="@string/password"-->
+                <!--                android:textColor="@color/colorTextBlack"-->
+                <!--                android:textSize="12sp" />-->
+
+                <!--            <EditText-->
+                <!--                android:id="@+id/txtPassword"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginHorizontal="20dp"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:hint="@string/password"-->
+                <!--                android:inputType="textPassword"-->
+                <!--                android:textColor="@color/colorTextBlack"-->
+                <!--                android:textSize="12sp" />-->
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/input_style"
+                    android:drawableStart="@drawable/ic_key"
+                    android:drawablePadding="20dp"
+                    android:hint="Nhập mật khẩu"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="@string/mat_khau"
+                android:textColor="@color/colorTextBlack"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/txtToiThieu8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="@string/toi_thieu_8_ki_tu"
+                android:textColor="@color/colorRed"
+                android:visibility="gone" />
+
+            <!-- INPUT CONFIRM PASSWORD -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:text="@string/vietnam_phone_prefix"
+                android:orientation="horizontal">
+
+                <!--            <TextView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="30dp"-->
+                <!--                android:text="@string/confirm_password"-->
+                <!--                android:textColor="@color/colorTextBlack"-->
+                <!--                android:textSize="12sp" />-->
+
+                <!--            <EditText-->
+                <!--                android:id="@+id/txtConfirmPassword"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginHorizontal="20dp"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:hint="@string/confirm_password"-->
+                <!--                android:inputType="textPassword"-->
+                <!--                android:textColor="@color/colorTextBlack"-->
+                <!--                android:textSize="12sp" />-->
+                <EditText
+                    android:id="@+id/txtConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/input_style"
+                    android:drawableStart="@drawable/ic_key"
+                    android:drawablePadding="20dp"
+                    android:hint="Xác nhận mật khẩu"
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtConfirmPasswordError"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="@string/xac_nhan_mat_khau"
+                android:textColor="@color/colorRed"
+                android:visibility="gone" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <!-- REGISTER BUTTON -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                style="@style/button_style_danger"
+                android:layout_gravity="center"
+                android:text="Đăng kí"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:text="@string/or"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="14sp" />
+
+            <!-- LOGIN WITH GOOGLE ACCOUNT -->
+            <ImageButton
+                android:id="@+id/btnGoogleLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_login_with_social_account"
+                android:paddingHorizontal="60dp"
+                android:paddingVertical="15dp"
+                android:src="@drawable/google_logo" />
+
+            <!-- REGISTER IF NO ACCOUNT -->
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/login"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/txtPhoneNumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_weight="1"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="12sp" />
-
         </LinearLayout>
-
-        <!-- INPUT PASSWORD -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:text="@string/password"-->
-<!--                android:textColor="@color/colorTextBlack"-->
-<!--                android:textSize="12sp" />-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/txtPassword"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="20dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:hint="@string/password"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:textColor="@color/colorTextBlack"-->
-<!--                android:textSize="12sp" />-->
-            <EditText
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:autofillHints=""
-                android:background="@drawable/input_style"
-                android:drawableStart="@drawable/ic_key"
-                android:drawablePadding="20dp"
-                android:hint="Nhập mật khẩu"
-                android:inputType="numberDecimal"
-                android:paddingHorizontal="20dp"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
-
-        </LinearLayout>
-
-        <!-- INPUT CONFIRM PASSWORD -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:text="@string/confirm_password"-->
-<!--                android:textColor="@color/colorTextBlack"-->
-<!--                android:textSize="12sp" />-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/txtConfirmPassword"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="20dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:hint="@string/confirm_password"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:textColor="@color/colorTextBlack"-->
-<!--                android:textSize="12sp" />-->
-            <EditText
-                android:id="@+id/txtConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:autofillHints=""
-                android:background="@drawable/input_style"
-                android:drawableStart="@drawable/ic_key"
-                android:drawablePadding="20dp"
-                android:hint="Xác nhận mật khẩu"
-                android:inputType="numberDecimal"
-                android:paddingHorizontal="20dp"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </ScrollView>
+    <!--     INPUT PHONE NUMBER -->
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp" />
 
     <!-- REGISTER BUTTON -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
-        style="@style/button_style_danger"
-        android:layout_gravity="center"
-        android:text="Đăng kí"
-        android:textAllCaps="false" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btnRegister"-->
+<!--        style="@style/button_style_danger"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="Đăng kí"-->
+<!--        android:textAllCaps="false" />-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:gravity="center"
-        android:text="@string/or"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="14sp" />
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginVertical="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/or"-->
+<!--        android:textColor="@color/colorTextBlack"-->
+<!--        android:textSize="14sp" />-->
 
-    <!-- LOGIN WITH GOOGLE ACCOUNT -->
-    <ImageButton
-        android:id="@+id/btnGoogleLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/button_login_with_social_account"
-        android:paddingHorizontal="60dp"
-        android:paddingVertical="15dp"
-        android:src="@drawable/google_logo" />
+<!--    &lt;!&ndash; LOGIN WITH GOOGLE ACCOUNT &ndash;&gt;-->
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnGoogleLogin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:background="@drawable/button_login_with_social_account"-->
+<!--        android:paddingHorizontal="60dp"-->
+<!--        android:paddingVertical="15dp"-->
+<!--        android:src="@drawable/google_logo" />-->
 
-    <!-- REGISTER IF NO ACCOUNT -->
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/login"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="12sp" />
+<!--    &lt;!&ndash; REGISTER IF NO ACCOUNT &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_login"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/login"-->
+<!--        android:textColor="@color/colorTextBlack"-->
+<!--        android:textSize="12sp" />-->
+
 
 </LinearLayout>

@@ -385,6 +385,14 @@
         \n * Ô tô: bạn có thể nhờ bảo về để được hướng dẫn chỗ gửi xe cách bệnh viện 150m
         \n 2. Bạn vào quầy đăng kí và <b>báo đã đặt khám qua Umbrella Health</b> để được ưu tiên hỗ trợ
     </string>
+    <string name="mat_khau">*Mật khẩu phải thoả mãn những điều kiện sau :
+    </string>
+    <string name="toi_thieu_8_ki_tu">
+         - Tối thiểu 8 kí tự
+    </string>
+    <string name="xac_nhan_mat_khau">
+         - Mật khẩu không đồng nhất
+    </string>
     <string name="note_attention_1">
         <b>Lưu ý </b>
         \n * Khi đến khám, bệnh nhân nên tuân thu nguyên tắc xếp hàng khi chờ khám, không chen lấn xô đẩy
